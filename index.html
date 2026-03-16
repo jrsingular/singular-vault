@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Singular Vault</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --bg: #000;
+  --surface: #111;
+  --surface2: #1a1a1a;
+  --border: #222;
+  --border-hover: #333;
+  --accent: #e85d3a;
+  --text: #f5f5f7;
+  --text2: #86868b;
+  --text3: #424245;
+  --white: #fff;
+  --green: #30d158;
+  --red: #ff453a;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== HERO ===== */
+.hero {
+  padding: 100px 24px 0;
+  text-align: center;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.hero-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-size: clamp(40px, 5.5vw, 72px);
+  font-weight: 700;
+  letter-spacing: -2.5px;
+  line-height: 1.08;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+.hero p {
+  font-size: 18px;
+  color: var(--text2);
+  line-height: 1.65;
+  max-width: 560px;
+  margin: 0 auto;
+  font-weight: 400;
+}
+.hero .skill-count {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text3);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.hero .skill-count span { color: var(--accent); }
+
+/* ===== EVERGREEN STRIP ===== */
+.evergreen-strip {
+  padding: 56px 24px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.eg-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.eg-card {
+  background: var(--bg);
+  padding: 28px 24px;
+  text-align: center;
+}
+.eg-card-number {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.eg-card-number.accent { color: var(--accent); }
+.eg-card-number.green { color: var(--green); }
+.eg-card-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ===== PLAN BANNER ===== */
+.plan-banner {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+  background: var(--surface);
+}
+.plan-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.plan-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green);
+}
+.plan-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.plan-text {
+  font-size: 13px;
+  color: var(--text2);
+  font-weight: 400;
+}
+.plan-text strong {
+  color: var(--white);
+  font-weight: 600;
+}
+.plan-divider {
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===== NAV / FILTER ===== */
+.filter-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+.filter-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 52px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.filter-inner::-webkit-scrollbar { display: none; }
+.ftab {
+  padding: 0 16px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text2);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s;
+  font-family: inherit;
+}
+.ftab:hover { color: var(--text); }
+.ftab.active {
+  color: var(--white);
+  border-bottom-color: var(--white);
+  font-weight: 500;
+}
+
+/* ===== ROLE FILTER ===== */
+.role-bar {
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+.role-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 44px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.role-inner::-webkit-scrollbar { display: none; }
+.role-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  padding-right: 12px;
+  border-right: 1px solid var(--border);
+  margin-right: 4px;
+}
+.rtab {
+  padding: 0 14px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text3);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s;
+  font-family: inherit;
+}
+.rtab:hover { color: var(--text2); }
+.rtab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-weight: 500;
+}
+
+/* MVP modal badge */
+.m-mvp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(232,93,58,0.1);
+  padding: 4px 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+/* ===== SEARCH ===== */
+.search-area {
+  padding: 40px 0 32px;
+}
+.search-input {
+  width: 100%;
+  max-width: 480px;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-family: inherit;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-input::placeholder { color: var(--text3); }
+.search-input:focus { border-color: var(--text3); }
+
+/* ===== GRID ===== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 80px;
+}
+.skill-card {
+  background: var(--bg);
+  padding: 36px;
+  cursor: pointer;
+  transition: background 0.3s;
+  position: relative;
+}
+.skill-card:hover { background: var(--surface); }
+.card-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text3);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.card-name {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.card-desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.55;
+  margin-bottom: 20px;
+  max-width: 420px;
+}
+
+/* Before/After mini */
+.card-ba {
+  display: flex;
+  gap: 24px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+.ba-col .ba-head {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.ba-col.before .ba-head { color: var(--text3); }
+.ba-col.after .ba-head { color: var(--green); }
+.ba-col .ba-num {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+.ba-col.before .ba-num {
+  color: var(--text3);
+  text-decoration: line-through;
+}
+.ba-col.after .ba-num { color: var(--white); }
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-services {
+  font-size: 12px;
+  color: var(--text3);
+  font-weight: 500;
+}
+.card-version {
+  font-size: 11px;
+  color: var(--text3);
+  font-weight: 500;
+}
+
+.card-arrow {
+  position: absolute;
+  top: 36px;
+  right: 36px;
+  font-size: 20px;
+  color: var(--text3);
+  transition: color 0.2s, transform 0.2s;
+}
+.skill-card:hover .card-arrow { color: var(--accent); transform: translateX(3px); }
+
+/* MVP badge */
+.card-mvp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.card-mvp-rank {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0;
+}
+
+/* Connector icons row */
+.card-conns {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+}
+.card-conn-dots {
+  display: flex;
+  gap: 3px;
+}
+.card-conn-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  opacity: 0.7;
+}
+.card-conn-dot:nth-child(n+5) { opacity: 0.4; }
+.card-conn-dot:nth-child(n+7) { opacity: 0.2; }
+.card-conn-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text3);
+}
+.card-conn-label span {
+  color: var(--green);
+  font-weight: 600;
+}
+
+/* Curated badge */
+.curated-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text3);
+  margin-bottom: 6px;
+}
+.curated-badge svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Modal data source callout */
+.m-sources-callout {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+.m-sources-head {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+.m-sources-desc {
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Single column on last odd card */
+.skill-card.full-width { grid-column: 1 / -1; }
+
+/* EMPTY */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 24px;
+  color: var(--text3);
+}
+.empty-state h3 { font-size: 18px; color: var(--text2); margin-bottom: 6px; }
+
+/* ===== MODAL ===== */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 48px 24px;
+}
+.overlay.open {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from{opacity:0}to{opacity:1} }
+
+.modal {
+  width: 100%;
+  max-width: 720px;
+  background: var(--surface);
+  border-radius: 20px;
+  overflow: hidden;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes slideUp { from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)} }
+
+.m-head {
+  padding: 40px 40px 0;
+  position: relative;
+}
+.m-close {
+  position: absolute;
+  top: 20px; right: 20px;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: none;
+  color: var(--text2);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.m-close:hover { background: #333; }
+.m-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.m-name {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.m-version-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.m-ver-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text2);
+  background: var(--surface2);
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+.m-ver-date {
+  font-size: 12px;
+  color: var(--text3);
+}
+.m-tagline {
+  font-size: 16px;
+  color: var(--text2);
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+
+.m-body { padding: 0 40px 40px; }
+
+/* B/A block */
+.m-ba {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.m-ba-col { padding: 28px; }
+.m-ba-col.before { background: var(--bg); border-right: 1px solid var(--border); }
+.m-ba-col.after { background: var(--bg); }
+.m-ba-col .m-ba-head {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.m-ba-col.before .m-ba-head { color: var(--text3); }
+.m-ba-col.after .m-ba-head { color: var(--green); }
+.m-ba-col .m-ba-stat {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+.m-ba-col.before .m-ba-stat { color: var(--text3); }
+.m-ba-col.after .m-ba-stat { color: var(--white); }
+.m-ba-item {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+  padding: 6px 0;
+  padding-left: 20px;
+  position: relative;
+}
+.m-ba-col.before .m-ba-item::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--text3);
+}
+.m-ba-col.after .m-ba-item::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: 600;
+}
+
+/* Detail rows */
+.m-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.m-detail {
+  background: var(--bg);
+  padding: 20px 24px;
+}
+.m-detail.full { grid-column: 1 / -1; }
+.m-detail .md-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text3);
+  margin-bottom: 8px;
+}
+.m-detail .md-val {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+}
+.m-detail .md-big {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+
+/* Connectors */
+.conn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.conn-tag {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: var(--surface2);
+  color: var(--text2);
+}
+
+/* Personas */
+.persona-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.persona-tag {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: var(--surface2);
+  color: var(--text2);
+}
+
+/* Changelog */
+.m-changelog {
+  margin-bottom: 32px;
+}
+.m-changelog-head {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text3);
+  margin-bottom: 12px;
+}
+.m-changelog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.m-changelog-item {
+  font-size: 13px;
+  color: var(--text2);
+  padding-left: 16px;
+  position: relative;
+}
+.m-changelog-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+/* Note */
+.m-note {
+  font-size: 13px;
+  color: var(--text3);
+  padding: 16px 20px;
+  background: var(--surface2);
+  border-radius: 12px;
+  margin-bottom: 32px;
+}
+
+/* CTA */
+.m-cta {
+  display: flex;
+  gap: 12px;
+}
+.m-btn {
+  flex: 1;
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+  text-align: center;
+}
+.m-btn.primary {
+  background: var(--accent);
+  color: var(--white);
+}
+.m-btn.primary:hover { opacity: 0.9; }
+.m-btn.secondary {
+  background: var(--surface2);
+  color: var(--text);
+}
+.m-btn.secondary:hover { background: #252525; }
+
+/* ===== BOTTOM CTA ===== */
+.bottom-cta {
+  text-align: center;
+  padding: 80px 24px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.bottom-cta h2 {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+}
+.bottom-cta p {
+  font-size: 16px;
+  color: var(--text2);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+.bottom-cta .cta-link {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.bottom-cta .cta-link:hover { opacity: 0.8; }
+.bottom-cta .cta-link span { margin-left: 4px; }
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--text3);
+  font-size: 12px;
+}
+
+/* ===== MAIN SECTION TABS ===== */
+.main-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+}
+.main-tabs-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  height: 56px;
+  padding: 0 24px;
+}
+.main-tab {
+  padding: 0 32px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text3);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.2s;
+}
+.main-tab:hover { color: var(--text2); }
+.main-tab.active {
+  color: var(--white);
+  border-bottom-color: var(--accent);
+}
+.main-tab svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.5;
+}
+
+/* Section visibility */
+.section-panel { display: none; }
+.section-panel.visible { display: block; }
+
+/* ===== PROCESS DIAGRAM ===== */
+.process-section {
+  padding: 80px 24px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.process-section .section-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.process-section h2 {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  text-align: center;
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+.process-section .section-sub {
+  font-size: 17px;
+  color: var(--text2);
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 56px;
+  line-height: 1.6;
+}
+
+/* Timeline */
+.process-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.process-timeline::before {
+  content: '';
+  position: absolute;
+  left: 27px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--green));
+  opacity: 0.3;
+  border-radius: 2px;
+}
+
+.p-step {
+  display: flex;
+  gap: 32px;
+  padding: 36px 0;
+  position: relative;
+}
+.p-step:first-child { padding-top: 0; }
+.p-step:last-child { padding-bottom: 0; }
+
+.p-node {
+  width: 56px;
+  min-width: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+.p-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+.p-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.5;
+  stroke: var(--text3);
+  fill: none;
+}
+.p-step.active .p-icon {
+  background: rgba(232,93,58,0.1);
+  border-color: rgba(232,93,58,0.3);
+}
+.p-step.active .p-icon svg { stroke: var(--accent); }
+.p-step.compound .p-icon {
+  background: rgba(48,209,88,0.1);
+  border-color: rgba(48,209,88,0.3);
+}
+.p-step.compound .p-icon svg { stroke: var(--green); }
+.p-step-num {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text3);
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.p-content {
+  flex: 1;
+  min-width: 0;
+}
+.p-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.p-desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  max-width: 580px;
+}
+
+/* Detail pills */
+.p-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.p-pill {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+.p-pill.accent {
+  border-color: rgba(232,93,58,0.3);
+  color: var(--accent);
+  background: rgba(232,93,58,0.06);
+}
+.p-pill.green {
+  border-color: rgba(48,209,88,0.3);
+  color: var(--green);
+  background: rgba(48,209,88,0.06);
+}
+
+/* Compound callout */
+.compound-callout {
+  margin-top: 16px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.cc-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.cc-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.cc-item {
+  font-size: 13px;
+  color: var(--text2);
+  padding-left: 16px;
+  position: relative;
+}
+.cc-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  .skills-grid { grid-template-columns: 1fr; }
+  .m-ba { grid-template-columns: 1fr; }
+  .m-ba-col.before { border-right: none; border-bottom: 1px solid var(--border); }
+  .m-details { grid-template-columns: 1fr; }
+  .m-head, .m-body { padding-left: 24px; padding-right: 24px; }
+  .m-cta { flex-direction: column; }
+  .hero h1 { letter-spacing: -2px; }
+  .eg-grid { grid-template-columns: repeat(2, 1fr); }
+  .plan-inner { text-align: center; }
+  .ftab { padding: 0 12px; font-size: 12px; }
+  .p-step { gap: 20px; }
+  .p-node { width: 44px; min-width: 44px; }
+  .p-icon { width: 44px; height: 44px; border-radius: 12px; }
+  .p-icon svg { width: 20px; height: 20px; }
+  .process-timeline::before { left: 21px; }
+  .cc-items { grid-template-columns: 1fr; }
+  .main-tab { padding: 0 20px; font-size: 14px; }
+  .main-tab svg { width: 16px; height: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">The Singular Vault</div>
+  <h1>When you partner with Singular, your company gets <em>smarter every day.</em></h1>
+  <p>101 pre-built AI Skills that connect your scattered systems, clean your dirty data, and automate the expensive, slow work slowing you down. Every Skill improves continuously — your business compounds.</p>
+  <div class="skill-count"><span>101</span> skills · <span>17</span> categories · <span>400+</span> system connectors</div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="evergreen-strip">
+  <div class="eg-grid">
+    <div class="eg-card">
+      <div class="eg-card-number accent">101</div>
+      <div class="eg-card-label">Pre-Built Skills</div>
+    </div>
+    <div class="eg-card">
+      <div class="eg-card-number green">∞</div>
+      <div class="eg-card-label">Free Updates Forever</div>
+    </div>
+    <div class="eg-card">
+      <div class="eg-card-number">3–5</div>
+      <div class="eg-card-label">Days to Deploy</div>
+    </div>
+    <div class="eg-card">
+      <div class="eg-card-number accent">17</div>
+      <div class="eg-card-label">Industries Covered</div>
+    </div>
+  </div>
+</div>
+
+<!-- PLAN BANNER -->
+<div class="plan-banner">
+  <div class="plan-inner">
+    <div class="plan-badge"><span class="plan-dot"></span>Vault Access Included</div>
+    <span class="plan-divider"></span>
+    <div class="plan-text">Every client on an <strong>active Copilot plan</strong> gets full Vault access — all 101 Skills, all updates, all new releases. Your AI library grows automatically.</div>
+  </div>
+</div>
+
+<!-- MAIN SECTION TABS -->
+<div class="main-tabs">
+  <div class="main-tabs-inner">
+    <button class="main-tab active" onclick="showPanel('process',this)">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      How It Works
+    </button>
+    <button class="main-tab" onclick="showPanel('library',this)">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Skill Library
+      <span style="font-size:11px;color:var(--accent);font-weight:700;margin-left:2px">101</span>
+    </button>
+  </div>
+</div>
+
+<!-- ============ PANEL: HOW IT WORKS ============ -->
+<div class="section-panel visible" id="panel-process">
+
+<div class="process-section">
+  <div class="section-label">How It Works</div>
+  <h2>Choose a Skill. We wire it into<br>your company's brain.</h2>
+  <div class="section-sub">Every Skill starts generic and becomes yours — trained on your data, tuned to your processes, compounding in value every week.</div>
+
+  <div class="process-timeline">
+
+    <div class="p-step active">
+      <div class="p-node">
+        <div class="p-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+        <div class="p-step-num">Step 1</div>
+      </div>
+      <div class="p-content">
+        <div class="p-title">Choose Your Skill</div>
+        <div class="p-desc">Browse the Vault by industry, role, or problem. Pick the Skill that solves your most expensive, slowest process. We handle the rest.</div>
+        <div class="p-pills">
+          <span class="p-pill accent">Browse 101 curated Skills</span>
+          <span class="p-pill">Filter by industry</span>
+          <span class="p-pill">Filter by role</span>
+          <span class="p-pill">MVP Top 20 ranked</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-step active">
+      <div class="p-node">
+        <div class="p-icon"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
+        <div class="p-step-num">Step 2</div>
+      </div>
+      <div class="p-content">
+        <div class="p-title">We Connect Your Scattered Systems</div>
+        <div class="p-desc">Your data lives in 6–12 disconnected tools. We integrate all of them — CRM, PM, email, accounting, scheduling, documents — into one unified pipeline. No rip-and-replace. We work with what you have.</div>
+        <div class="p-pills">
+          <span class="p-pill">Gmail / Outlook</span>
+          <span class="p-pill">Airtable</span>
+          <span class="p-pill">Monday / ClickUp / Jira</span>
+          <span class="p-pill">QuickBooks / Xero</span>
+          <span class="p-pill">Google Drive</span>
+          <span class="p-pill">Slack</span>
+          <span class="p-pill">CRM</span>
+          <span class="p-pill accent">+ 400 more</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-step active">
+      <div class="p-node">
+        <div class="p-icon"><svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <div class="p-step-num">Step 3</div>
+      </div>
+      <div class="p-content">
+        <div class="p-title">We Clean Your Dirty Data</div>
+        <div class="p-desc">Duplicates, missing fields, inconsistent formats, mismatched records — every business has dirty data. We normalize, deduplicate, and structure everything on ingest so the AI gets clean inputs from day one.</div>
+        <div class="p-pills">
+          <span class="p-pill">Deduplication</span>
+          <span class="p-pill">Format normalization</span>
+          <span class="p-pill">Missing field detection</span>
+          <span class="p-pill">Record matching</span>
+          <span class="p-pill">Schema mapping</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-step active">
+      <div class="p-node">
+        <div class="p-icon"><svg viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div>
+        <div class="p-step-num">Step 4</div>
+      </div>
+      <div class="p-content">
+        <div class="p-title">Calibrate to Your Company</div>
+        <div class="p-desc">We tune the Skill to your specific processes, terminology, value propositions, brand voice, pricing, and workflows. It doesn't just work generically — it works like your best employee would.</div>
+        <div class="p-pills">
+          <span class="p-pill accent">Your processes</span>
+          <span class="p-pill accent">Your terminology</span>
+          <span class="p-pill accent">Your value props</span>
+          <span class="p-pill accent">Your pricing</span>
+          <span class="p-pill accent">Your brand voice</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-step active">
+      <div class="p-node">
+        <div class="p-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div class="p-step-num">Step 5</div>
+      </div>
+      <div class="p-content">
+        <div class="p-title">Deploy in 3–5 Days</div>
+        <div class="p-desc">Not months. Not quarters. Days. Your Skill goes live with real data, real outputs, and real users. We validate results with you before we call it done.</div>
+        <div class="p-pills">
+          <span class="p-pill green">Live in days</span>
+          <span class="p-pill">Real data validation</span>
+          <span class="p-pill">User training included</span>
+          <span class="p-pill">Feedback loop active</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-step compound">
+      <div class="p-node">
+        <div class="p-icon"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
+        <div class="p-step-num">Forever</div>
+      </div>
+      <div class="p-content">
+        <div class="p-title">Compounds Over Time</div>
+        <div class="p-desc">This is the part competitors can't copy. Your Skill gets smarter every week — learning your patterns, improving its outputs, absorbing your company intelligence. The longer you run it, the wider the moat.</div>
+        <div class="compound-callout">
+          <div class="cc-title">What compounds</div>
+          <div class="cc-items">
+            <div class="cc-item">Company-specific intelligence deepens</div>
+            <div class="cc-item">Output quality improves with feedback</div>
+            <div class="cc-item">Process optimizations discovered automatically</div>
+            <div class="cc-item">New edge cases handled without retraining</div>
+            <div class="cc-item">Singular ships platform updates — free</div>
+            <div class="cc-item">Your Skill library grows as we release new Skills</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- end panel-process -->
+
+<!-- ============ PANEL: SKILL LIBRARY ============ -->
+<div class="section-panel" id="panel-library">
+
+<!-- FILTER -->
+<div class="filter-bar" style="position:relative;top:auto">
+  <div class="filter-inner">
+    <button class="ftab active" onclick="setFilter('all',this)">All</button>
+    <button class="ftab" onclick="setFilter('musthave',this)">Must Have</button>
+    <button class="ftab" onclick="setFilter('universal',this)">Universal</button>
+    <button class="ftab" onclick="setFilter('construction',this)">Construction</button>
+    <button class="ftab" onclick="setFilter('professional',this)">Professional Services</button>
+    <button class="ftab" onclick="setFilter('realestate',this)">Real Estate</button>
+    <button class="ftab" onclick="setFilter('healthcare',this)">Healthcare</button>
+    <button class="ftab" onclick="setFilter('logistics',this)">Logistics</button>
+    <button class="ftab" onclick="setFilter('hospitality',this)">Hospitality</button>
+    <button class="ftab" onclick="setFilter('retail',this)">Retail</button>
+    <button class="ftab" onclick="setFilter('homeservices',this)">Home Services</button>
+    <button class="ftab" onclick="setFilter('insurance',this)">Insurance</button>
+    <button class="ftab" onclick="setFilter('education',this)">Education</button>
+    <button class="ftab" onclick="setFilter('peoplehr',this)">People & HR</button>
+    <button class="ftab" onclick="setFilter('marketing',this)">Marketing</button>
+    <button class="ftab" onclick="setFilter('scraping',this)">Data & Scraping</button>
+    <button class="ftab" onclick="setFilter('sop',this)">S&OP</button>
+    <button class="ftab" onclick="setFilter('finance',this)">Finance</button>
+  </div>
+</div>
+
+<!-- ROLE FILTER -->
+<div class="role-bar">
+  <div class="role-inner">
+    <span class="role-label">By Role</span>
+    <button class="rtab active" onclick="setRole('all',this)">All Roles</button>
+    <button class="rtab" onclick="setRole('ceo',this)">CEO / Founder</button>
+    <button class="rtab" onclick="setRole('cos',this)">Chief of Staff</button>
+    <button class="rtab" onclick="setRole('transform',this)">Transformation Champion</button>
+    <button class="rtab" onclick="setRole('hr',this)">HR / People</button>
+    <button class="rtab" onclick="setRole('cfo',this)">CFO / Finance</button>
+    <button class="rtab" onclick="setRole('legal',this)">Legal / Compliance</button>
+    <button class="rtab" onclick="setRole('sales',this)">Sales / Revenue</button>
+    <button class="rtab" onclick="setRole('marketing',this)">Marketing</button>
+    <button class="rtab" onclick="setRole('ops',this)">Operations</button>
+    <button class="rtab" onclick="setRole('clinical',this)">Clinical / Medical</button>
+    <button class="rtab" onclick="setRole('field',this)">Field / On-Site</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+  <div class="search-area">
+    <input type="text" class="search-input" id="searchInput" placeholder="Search 101 curated skills..." oninput="filterSkills()">
+  </div>
+  <div class="skills-grid" id="grid"></div>
+</div>
+
+</div><!-- end panel-library -->
+
+<!-- BOTTOM CTA -->
+<div class="bottom-cta">
+  <h2>Don't see your problem?</h2>
+  <p>Tell us the most expensive, slowest thing in your business. We'll build the Skill that fixes it.</p>
+  <a href="https://singularagency.co" target="_blank" class="cta-link">Book a strategy call <span>→</span></a>
+</div>
+
+<div class="footer">Singular Innovation · St. Petersburg, FL · 2026</div>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modal"></div>
+</div>
+
+<script>
+// TAB NAVIGATION
+function showPanel(panel, el) {
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('visible'));
+  document.getElementById('panel-' + panel).classList.add('visible');
+  document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+const D={
+
+// ===========================
+// MUST HAVE (8)
+// ===========================
+'email-triage':{name:'Email Triage & Auto-Draft',cat:'musthave',catL:'Must Have',tag:'Inbox zero by 9 AM. Every day.',desc:'Categorizes incoming email by urgency, topic, and sender importance. Drafts replies for routine messages. Flags critical items. Archive the noise.',hook:'You spend 2.5 hours/day in email. Half of it is unnecessary.',bS:'2.5 hrs/day in email',bI:['Inbox is a to-do list with no priority','Important emails buried under noise','Reply to routine messages manually','Context-switch 50+ times per day'],aS:'45 min/day',aI:['Inbox auto-sorted by urgency','Routine replies drafted for approval','Critical items flagged immediately','Newsletters and noise auto-archived'],time:'75% reduction',money:'Reclaimed executive time',roi:'Tomorrow morning',personas:['CEO / Founder','Executive','Office Manager'],conns:['Gmail / Outlook','Calendar','CRM','Slack'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'2.3',updated:'Mar 2026',changes:['Outlook 365 integration','Priority learning from user behavior','VIP sender auto-detection','Thread summary for long chains']},
+
+'knowledge-base':{name:'Document Search & Knowledge Base',cat:'musthave',catL:'Must Have',tag:'Ask your company a question. Get the answer.',desc:'Indexes all company documents — Drive, Notion, Confluence, Sharepoint. Natural language search across everything. Answers with source citations.',hook:'Your team spends 20% of their time looking for information that already exists.',bS:'9.3 hrs/week searching',bI:['Files scattered across 5+ platforms','Tribal knowledge in people\'s heads','New hires lost for months','Same questions asked repeatedly'],aS:'Instant answers',aI:['One search across all platforms','Natural language — no exact keywords needed','Answers cite the source document','Knowledge compounds over time'],time:'20% time reclaimed',money:'Faster onboarding',roi:'Week 1',personas:['All Employees','HR','Operations','IT'],conns:['Google Drive','Notion','Confluence','Sharepoint','Slack'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.8',updated:'Mar 2026',changes:['Sharepoint connector added','Improved semantic search','Permission-aware results','Auto-generated FAQ from common queries']},
+
+'feedback-analyzer':{name:'Customer Feedback Analyzer',cat:'musthave',catL:'Must Have',tag:'Every review, survey, and comment — one dashboard.',desc:'Aggregates feedback from reviews, NPS surveys, support tickets, and social mentions. Identifies trends, sentiment shifts, and urgent issues.',hook:'Your customers are telling you exactly what to fix. You\'re just not listening fast enough.',bS:'Feedback in 6 places',bI:['Reviews on Google, Yelp, G2 — unchecked','NPS surveys exported to CSV and forgotten','Support tickets = anecdotal evidence','Trends spotted months late'],aS:'Unified insights',aI:['All feedback in one live dashboard','Sentiment tracked over time','Urgent issues surfaced immediately','Trend reports auto-generated weekly'],time:'10+ hrs/month',money:'Lower churn',roi:'First weekly report',personas:['CEO','Product Manager','Customer Success'],conns:['Google Reviews','NPS Tools','Help Desk','Social Media'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.5',updated:'Mar 2026',changes:['G2 and Capterra integration','Competitor mention tracking','Theme clustering algorithm','Executive summary auto-email']},
+
+'kpi-dashboard':{name:'Weekly KPI Dashboard',cat:'musthave',catL:'Must Have',tag:'Your numbers, every Monday at 8 AM.',desc:'Pulls data from CRM, accounting, analytics, and PM tools. Generates a formatted weekly KPI report with trends, highlights, and red flags.',hook:'If you can\'t see your numbers in real time, you\'re driving blind.',bS:'Manual spreadsheet updates',bI:['KPIs updated manually each week','Numbers scattered across 4+ tools','Team debates which numbers are right','Dashboard is always out of date'],aS:'Auto-generated Mondays',aI:['Data pulled from all sources automatically','KPIs formatted with trend arrows','Red flags highlighted','Delivered to inbox before standup'],time:'3–5 hrs/week',money:'Better decisions',roi:'First Monday',personas:['CEO / Founder','COO','Department Heads'],conns:['CRM','QuickBooks / Xero','Google Analytics','PM Tools'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.7',updated:'Mar 2026',changes:['Customizable KPI templates','Slack delivery option','Variance alerts','Year-over-year comparison']},
+
+'social-scheduler':{name:'Social Media Content Engine',cat:'musthave',catL:'Must Have',tag:'One brief. Every platform. Consistent brand.',desc:'Takes a content brief, blog post, or announcement and generates platform-specific posts for LinkedIn, Instagram, X, Facebook, and email. Schedules and publishes.',hook:'Social media shouldn\'t take 15 hours a week.',bS:'15 hrs/week',bI:['Write each post from scratch','Reformulate for each platform','Inconsistent posting schedule','Brand voice drifts across channels'],aS:'2 hrs/week',aI:['One input → all platforms formatted','Brand voice locked in','Publishing calendar auto-populated','Engagement tracked across channels'],time:'85% reduction',money:'Consistent pipeline',roi:'First content batch',personas:['Marketing Manager','Founder','Social Media'],conns:['LinkedIn','Instagram','X / Twitter','Buffer / Hootsuite','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'2.0',updated:'Mar 2026',changes:['Thread/carousel format support','Hashtag strategy engine','Best-time-to-post learning','Image caption generator']},
+
+'hr-handbook':{name:'HR Policy & Handbook Generator',cat:'musthave',catL:'Must Have',tag:'State-compliant handbook in an afternoon.',desc:'Generates employee handbooks, policy documents, and HR procedures customized to your state, industry, and company size. Updates when laws change.',hook:'No handbook = legal liability. Bad handbook = worse liability.',bS:'$5K–$15K + months',bI:['Hire employment lawyer for $300/hr','Months of back-and-forth','Outdated the day it\'s published','Each state requires different policies'],aS:'Same day + $0',aI:['Input company details and state','Complete handbook generated','State-specific policies included','Auto-alerts when laws change'],time:'Weeks → hours',money:'$5K–$15K saved',roi:'First handbook',personas:['HR Director','Founder','Office Manager','COO'],conns:['Google Docs','HRIS','Email','Compliance Feeds'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.4',updated:'Mar 2026',changes:['2026 labor law updates for all 50 states','Remote work policy templates','DEI policy module','Acknowledgment signature tracking']},
+
+'competitive-intel':{name:'Competitive Intelligence Monitor',cat:'musthave',catL:'Must Have',tag:'Know what your competitors do before their customers do.',desc:'Monitors competitor websites, press releases, job postings, social media, and pricing changes. Weekly digest with actionable insights.',hook:'Your competitors changed pricing last month. Did you know?',bS:'Blind spots everywhere',bI:['Check competitor sites manually (or don\'t)','Miss pricing changes','Hear about competitor moves from customers','No systematic tracking'],aS:'Weekly intel digest',aI:['Competitors monitored 24/7','Pricing, hiring, product changes tracked','Weekly digest with insights','Alerts for major moves'],time:'Proactive vs. reactive',money:'Protected market share',roi:'First alert',personas:['CEO','Sales Director','Marketing','Product'],conns:['Web Monitoring','LinkedIn','Glassdoor','News Feeds','CRM'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.6',updated:'Mar 2026',changes:['Job posting tracking added','SEO rank comparison','Social media share-of-voice','Custom alert thresholds']},
+
+'expense-report':{name:'Expense Report Automator',cat:'musthave',catL:'Must Have',tag:'Photo of receipt. Done.',desc:'Employees snap a photo of any receipt. AI extracts merchant, amount, category, and date. Auto-fills expense report, checks policy compliance, routes for approval.',hook:'Your team hates expense reports as much as you hate approving them.',bS:'45 min per report',bI:['Pile of crumpled receipts','Manual data entry into spreadsheet','Policy violations caught at month-end','Reimbursement takes weeks'],aS:'60 seconds per receipt',aI:['Snap photo → data extracted','Auto-categorized and policy-checked','Routed for instant approval','Reimbursement same week'],time:'95% faster',money:'Fewer policy violations',roi:'First expense cycle',personas:['All Employees','Finance','Office Manager'],conns:['Camera','QuickBooks / Xero','Slack','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.3',updated:'Mar 2026',changes:['Multi-currency receipt support','Mileage auto-calculation','Per diem auto-check','Batch upload support']},
+
+// ===========================
+// UNIVERSAL (6) — existing
+// ===========================
+'contract-generator':{name:'Contract Generator',cat:'universal',catL:'Universal',tag:'From ID photo to jurisdiction-specific contract in 9 minutes.',desc:'Creates employment, vendor, NDA, and service contracts from minimal input — ID photo, role description, basic terms. Jurisdiction-specific, every clause included, ready for signature.',hook:'Your lawyer takes 10 days and $500. This takes 9 minutes.',bS:'10 days + $500',bI:['Call lawyer, negotiate retainer','Wait 5–10 business days for draft','2–3 revision cycles at $200/hr','Miss hire windows while waiting','Inconsistent quality across matters'],aS:'9 minutes + $0',aI:['Upload ID photo and role description','17-page contract generated with all clauses','State-specific, formatted, ready to sign','Send same day — hire faster','Consistent quality every single time'],time:'99% faster',money:'$3K–$6K/year',roi:'First contract — immediate',personas:['Founder / CEO','HR Director','Office Manager'],conns:['Google Drive','CRM','DocuSign','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'2.4',updated:'Mar 2026',changes:['Multi-jurisdiction clause library expanded to 50 states','Improved NDA and vendor agreement templates','DocuSign auto-send integration','Better ID photo data extraction']},
+
+'proposal-builder':{name:'Proposal & Quote Builder',cat:'universal',catL:'Universal',tag:'Discovery call to polished proposal in 15 minutes.',desc:'Generates branded proposals from a call transcript, voice note, or bullet points. Scope, timeline, pricing, terms — formatted and ready to send while momentum is high.',hook:'Stop spending 3 hours on a proposal that may not close.',bS:'2–4 hours each',bI:['Write from scratch every time','Formatting inconsistent across team','Slow follow-up loses deal momentum','Copy-paste errors from old proposals'],aS:'15 minutes',aI:['Drop call transcript or bullet points','Branded proposal auto-generated','Scope, timeline, pricing — polished','Send same day, close faster'],time:'90% reduction',money:'Higher close rates',roi:'Week 1',personas:['Sales','Account Executive','Founder'],conns:['Calendar','Email','Google Docs','CRM'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'2.1',updated:'Mar 2026',changes:['Voice note input support added','Improved pricing table formatting','Brand kit auto-detection','Multi-currency support']},
+
+'invoice-processor':{name:'Invoice & Expense Processor',cat:'universal',catL:'Universal',tag:'Receipt to reconciled entry in seconds.',desc:'Extracts data from receipts and invoices, categorizes expenses, enters into accounting system, flags anomalies. Near-zero error rate.',hook:'20+ day cycles with 20% errors. That ends now.',bS:'20+ days, 20% errors',bI:['Manual data entry from paper','Misclassified expenses missed','Month-end reconciliation chaos','Bookkeeper buried in busywork'],aS:'Minutes, <1% errors',aI:['Photo or PDF → auto-extracted','Categorized into QuickBooks/Xero','Anomalies flagged for review','Bookkeeper focuses on strategy'],time:'95% faster',money:'Eliminated errors + freed time',roi:'First billing cycle',personas:['Bookkeeper','Controller','Office Manager'],conns:['QuickBooks','Xero','Gmail','Bank Feeds'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.8',updated:'Feb 2026',changes:['Xero integration improved','Multi-receipt batch processing','Smarter expense categorization','Tax code auto-assignment']},
+
+'meeting-action':{name:'Meeting → Action Engine',cat:'universal',catL:'Universal',tag:'Every meeting produces actions, owners, and deadlines — automatically.',desc:'Transcribes meetings, extracts action items with owners and deadlines, drafts follow-up emails, logs commitments to your PM tool.',hook:'3.5 hours/week lost to meetings with no follow-through.',bS:'15–20 min lost/meeting',bI:['Scribbled notes nobody reads','Actions forgotten by end of day','No single source of truth','Follow-ups never sent'],aS:'Zero dropped balls',aI:['Full searchable transcript','Actions auto-assigned with deadlines','Logged to Asana/Notion instantly','Follow-up email drafted and ready'],time:'15–20 min/meeting',money:'Zero missed commitments',roi:'Meeting one',personas:['PM','Executive','Team Lead'],conns:['Calendar','Slack','Asana / Notion','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'2.0',updated:'Mar 2026',changes:['Spanish + Portuguese transcription','Linear integration added','Improved speaker detection','Commitment tracking dashboard']},
+
+'daily-briefing':{name:'Daily Executive Briefing',cat:'universal',catL:'Universal',tag:'Your entire day prioritized before coffee.',desc:'Morning summary: inbox priorities ranked by urgency, calendar with prep notes, pending decisions, loose ends, market updates.',hook:'Most executives spend their first hour just getting oriented.',bS:'60+ min to orient',bI:['Open 6 apps to figure out your day','Urgent items buried in inbox','No context for first meeting','Reactive until lunch'],aS:'Clarity at 7 AM',aI:['Priorities, calendar, decisions — one view','Urgent items surfaced and ranked','Prep notes for every meeting','Proactive from minute one'],time:'1+ hour/morning',money:'Better decisions',roi:'Tomorrow morning',personas:['CEO / Founder','Executive','Managing Partner'],conns:['Email','Calendar','CRM','Slack','News'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'2.2',updated:'Mar 2026',changes:['Competitor monitoring feeds','Meeting prep notes improved','Weekend digest mode','Custom priority rules']},
+
+'client-onboarding':{name:'Client Onboarding Automator',cat:'universal',catL:'Universal',tag:'Signed contract to kickoff without lifting a finger.',desc:'Collects intake info, generates welcome docs, sets up project templates, schedules kickoff, sends prep instructions. Premium experience, zero manual work.',hook:'Your onboarding is either inconsistent or nonexistent.',bS:'2–5 hours per client',bI:['Manual emails back and forth','Welcome docs forgotten','Inconsistent experience','Kickoff delayed by scheduling'],aS:'Fully automated',aI:['Smart forms adapt to client type','Welcome docs sent automatically','Project template created in PM tool','Kickoff scheduled with prep sent'],time:'80% faster',money:'Higher retention',roi:'First new client',personas:['Ops Manager','Founder','Account Manager'],conns:['Forms','CRM','Calendar','Google Docs','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.6',updated:'Feb 2026',changes:['Conditional form logic','Multi-language welcome docs','Calendly integration','Progress tracking for clients']},
+
+// ===========================
+// CONSTRUCTION (7)
+// ===========================
+'bid-estimation':{name:'Bid Estimation Copilot',cat:'construction',catL:'Construction',tag:'Win more bids by responding faster with better estimates.',desc:'Analyzes RFPs, pulls historical pricing, generates itemized cost estimates with material/labor breakdowns. Professional bid package ready for review.',hook:'Stop losing bids because your estimates took too long.',bS:'Days per estimate',bI:['80-page RFPs reviewed manually','Historical pricing in someone\'s head','Missed bid deadlines','Inconsistent markup across projects'],aS:'Hours, not days',aI:['AI extracts key RFP requirements','Historical pricing auto-referenced','Itemized breakdown generated instantly','Bid package ready for team review'],time:'70% faster',money:'Higher win rate',roi:'First bid cycle',personas:['Project Manager','Estimator','Owner'],conns:['Project Management','Spreadsheets','CRM','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.5',updated:'Mar 2026',changes:['Material cost database updated Q1 2026','Labor rate regional adjustment','Historical markup learning','PDF RFP parsing improved']},
+
+'sub-contract':{name:'Subcontractor Contract Kit',cat:'construction',catL:'Construction',tag:'Jurisdiction-specific sub agreements in 5 minutes.',desc:'Generates subcontractor agreements with insurance requirements, lien waivers, change orders, payment schedules. State-specific and compliant.',hook:'Your $400/hr lawyer takes a week. This takes 5 minutes.',bS:'$500 + 1 week',bI:['Lawyer drafts each contract','5–7 day turnaround','Generic templates miss state reqs','Change orders need another cycle'],aS:'5 min + $0',aI:['Input sub details and scope','State-specific agreement generated','Insurance, liens, changes included','Ready for signature immediately'],time:'99% faster',money:'$5K–$10K/year',roi:'First contract',personas:['Owner','CFO','Office Manager'],conns:['Google Drive','DocuSign','Accounting'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'2.0',updated:'Mar 2026',changes:['Florida and Texas lien law updates','Insurance requirement templates expanded','Change order workflow added','Payment schedule calculator']},
+
+'site-report':{name:'Daily Site Report Generator',cat:'construction',catL:'Construction',tag:'Foremen talk and snap. The report writes itself.',desc:'Photos + voice notes → formatted daily log with weather, crew, progress, issues, safety. Auto-distributes to stakeholders.',hook:'Your foremen hate paperwork. Now they just talk and snap.',bS:'30+ min/day, often skipped',bI:['Reports skipped because of paperwork','Handwritten notes lost or illegible','No photos in daily logs','Disputes without docs — you lose'],aS:'2 min — talk + snap',aI:['Voice note and photos from field','Formatted report auto-generated','All data points captured','Auto-sent to stakeholders'],time:'30+ min/day saved',money:'Dispute protection',roi:'Day 1 on-site',personas:['Foreman','Superintendent','PM'],conns:['Camera','Voice','Google Drive','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.7',updated:'Feb 2026',changes:['Weather auto-pulled from location','Photo geo-tagging','Spanish voice note support','Weekly summary rollup']},
+
+'safety-compliance':{name:'Safety Compliance Checker',cat:'construction',catL:'Construction',tag:'Catch OSHA violations before they find you.',desc:'Scans jobsite reports against OSHA requirements. Flags violations before inspectors arrive. Generates corrective action plans.',hook:'One OSHA fine costs $15K–$70K. This costs nothing to run.',bS:'Reactive — find out at inspection',bI:['Safety checks inconsistent','Violations found by OSHA, not you','Fines range $15K to $70K+','No corrective action trail'],aS:'Continuous monitoring',aI:['Every report scanned vs OSHA reqs','Violations flagged proactively','Action plans auto-generated','Full compliance documentation'],time:'Continuous vs. periodic',money:'Avoids $15K–$70K fines',roi:'First prevented violation',personas:['Safety Manager','Owner'],conns:['Daily Reports','OSHA Database','Email Alerts'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.4',updated:'Mar 2026',changes:['2026 OSHA standards updated','Photo-based hazard detection','Corrective action templates expanded','Insurance report export']},
+
+'dispatch-optimizer':{name:'Dispatch & Schedule Optimizer',cat:'construction',catL:'Construction',tag:'+2 jobs per tech per day without burnout.',desc:'AI-optimized routing — assigns jobs by skill, location, availability. Minimizes drive time, maximizes billable hours.',hook:'Manual dispatching leaves money on the table every day.',bS:'Manual gut-feel routing',bI:['Dispatcher juggles whiteboards','45 min drives between jobs','Unbalanced workloads','Lost revenue daily'],aS:'AI-optimized routes',aI:['Jobs auto-assigned by skill + location','Travel time minimized','Balanced workloads across team','+2 billable jobs per tech per day'],time:'+2 jobs/tech/day',money:'Significant revenue increase',roi:'First optimized week',personas:['Dispatcher','Ops Manager','Owner'],conns:['Scheduling','GPS/Maps','CRM','Invoicing'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.3',updated:'Feb 2026',changes:['Real-time traffic integration','Skill-matching algorithm improved','Overtime threshold alerts','Customer time-window preferences']},
+
+'material-procurement':{name:'Material Procurement Tracker',cat:'construction',catL:'Construction',tag:'Never wait on materials again.',desc:'Tracks material orders across vendors, monitors lead times, alerts on delays, auto-reorders recurring supplies. Prevents costly project stalls.',hook:'A delayed lumber shipment doesn\'t just cost the materials — it costs the crew standing idle.',bS:'Surprise shortages',bI:['Orders tracked in email threads','Lead time changes unnoticed','Crew idle waiting for materials','Duplicate orders from miscommunication'],aS:'Full supply visibility',aI:['All orders tracked in one dashboard','Lead time alerts before delays hit','Auto-reorder for recurring materials','Zero crew idle time from supply gaps'],time:'Eliminates idle days',money:'$10K–$50K/project saved',roi:'First avoided delay',personas:['Project Manager','Procurement','Owner'],conns:['Vendor Portals','Email','Spreadsheets','Scheduling'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.2',updated:'Mar 2026',changes:['Vendor price comparison','Delivery photo confirmation','Budget vs. actual tracking','Multi-project material rollup']},
+
+'punch-list':{name:'Punch List Manager',cat:'construction',catL:'Construction',tag:'Close out projects 60% faster.',desc:'Photo + voice → punch list items with location, trade, priority. Auto-assigns to subs, tracks completion, generates owner sign-off package.',hook:'Punch lists drag projects past deadline. Not anymore.',bS:'Weeks to close out',bI:['Handwritten punch lists','Items assigned verbally','No tracking on completion','Owner frustrated by delays'],aS:'Days to close out',aI:['Snap photo + speak the issue','Item created with all metadata','Auto-assigned to correct sub','Completion tracked → sign-off ready'],time:'60% faster closeout',money:'Earlier final payment',roi:'First project closeout',personas:['Superintendent','PM','Owner'],conns:['Camera','Voice','PM Tool','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.1',updated:'Mar 2026',changes:['Photo annotation tools','Sub notification via SMS','Completion percentage dashboard','Owner inspection report export']},
+
+// ===========================
+// PROFESSIONAL SERVICES (7)
+// ===========================
+'client-intake':{name:'Client Intake Qualifier',cat:'professional',catL:'Professional Services',tag:'Qualify leads 24/7 and route high-value prospects immediately.',desc:'Smart questionnaire → case assessment → conflict check → welcome packet. High-value prospects routed for immediate callback.',hook:'Stop losing clients because intake took 3 days.',bS:'2–5 days to qualify',bI:['Leads wait days for callback','Generic intake forms','No conflict check until partner review','Prospects go to competitors'],aS:'Qualified in minutes',aI:['24/7 smart questionnaire','Auto-assessment + conflict check','Welcome packet generated','High-value leads routed immediately'],time:'Same-day vs. 2–5 days',money:'Captured lost leads',roi:'First qualified lead',personas:['Managing Partner','Office Manager'],conns:['Website Forms','CRM','Calendar','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.9',updated:'Mar 2026',changes:['Conditional branching logic','Conflict check database integration','Lead scoring algorithm','SMS notification for high-value leads']},
+
+'engagement-letter':{name:'Engagement Letter Generator',cat:'professional',catL:'Professional Services',tag:'Eliminate $200/hr admin work from partner schedules.',desc:'Auto-drafts engagement letters per jurisdiction and practice area. Fee structure, scope, exclusions, termination — standardized and compliant.',hook:'Every engagement letter your partners draft costs $200/hr of their time.',bS:'$200/hr partner time',bI:['Partners draft letters manually','Inconsistent terms across firm','Scope creep from vague terms','High-value hours wasted on admin'],aS:'Generated in minutes',aI:['Intake data flows into letter','Jurisdiction + practice-specific','Standardized terms firmwide','Partners review and sign — done'],time:'95% faster',money:'Recaptured partner hours',roi:'First engagement letter',personas:['Managing Partner','Associate','Paralegal'],conns:['CRM','Intake System','DocuSign'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.6',updated:'Feb 2026',changes:['Added 12 practice area templates','Fee schedule builder','Retainer vs. flat fee logic','Client portal preview link']},
+
+'timesheet-reconciler':{name:'Timesheet & Billing Reconciler',cat:'professional',catL:'Professional Services',tag:'Find the 15–20% of billable time you\'re losing.',desc:'Cross-references calendars, emails, docs, and timesheets to surface unbilled hours. Weekly reports show exactly what was missed.',hook:'15–20% of billable time is going unbilled. That\'s pure revenue.',bS:'15–20% revenue leakage',bI:['Associates forget to log time','Calendar work never hits timesheets','Email work goes unbilled','Thousands lost every month'],aS:'Revenue recovered',aI:['AI cross-references all activity','Unbilled hours surfaced weekly','Report: "you missed X hours on Y client"','Partners approve for billing'],time:'Automated reconciliation',money:'15–20% recovered',roi:'First weekly report',personas:['Partners','Associates','Billing'],conns:['Calendar','Email','Time Tracking','Practice Mgmt'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.5',updated:'Mar 2026',changes:['Document activity tracking added','Minimum billing increment settings','Client-matter auto-matching','Revenue recovery dashboard']},
+
+'monthly-close':{name:'Monthly Close Accelerator',cat:'professional',catL:'Professional Services',tag:'3 weeks to 7 days.',desc:'Automates bank reconciliation, transaction categorization, variance reports, and draft financials. Accountant reviews — grunt work is done.',hook:'Your monthly close takes 3 weeks. Competitors do it in 7 days.',bS:'3+ weeks',bI:['Manual bank reconciliation','Hand-categorized transactions','Spreadsheet variance reports','Draft financials delayed'],aS:'7 days',aI:['Reconciliation automated nightly','Transactions auto-categorized','Variance reports in minutes','Draft financials ready for review'],time:'3 weeks → 7 days',money:'Faster decisions',roi:'First month-end close',personas:['Bookkeeper','Controller','CPA'],conns:['QuickBooks / Xero','Bank Feeds','Spreadsheets'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.7',updated:'Mar 2026',changes:['Multi-entity consolidation','Variance threshold customization','Year-over-year comparison','Audit trail export']},
+
+'case-research':{name:'Case Research Assistant',cat:'professional',catL:'Professional Services',tag:'Research in hours, not days.',desc:'Searches case law, statutes, and regulatory databases. Generates research memos with citations, opposing arguments, and relevant precedents.',hook:'Associates spend 60% of their time on research. Cut that in half.',bS:'8–12 hrs per matter',bI:['Manual database searches','Read dozens of irrelevant cases','Citations checked one by one','Research memos take a full day'],aS:'2–4 hours',aI:['AI searches across all databases','Relevant cases ranked by applicability','Citations auto-verified','Draft memo with opposing arguments'],time:'60% faster',money:'More matters per associate',roi:'First research assignment',personas:['Associate','Paralegal','Managing Partner'],conns:['Legal Databases','Document Management','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.3',updated:'Mar 2026',changes:['Multi-jurisdiction search','Opposing argument generator','Citation validation engine','Practice area specialization']},
+
+'compliance-audit':{name:'Compliance Audit Tracker',cat:'professional',catL:'Professional Services',tag:'Audit-ready, all the time.',desc:'Tracks regulatory requirements by jurisdiction, monitors deadlines, generates compliance checklists, flags gaps before auditors arrive.',hook:'Surprise audits only surprise the unprepared.',bS:'Reactive scramble',bI:['Compliance tracked in spreadsheets','Deadlines missed or last-minute','Gaps discovered during audit','Fines and penalties follow'],aS:'Always audit-ready',aI:['All requirements tracked automatically','Deadline alerts 30/60/90 days out','Gap analysis runs continuously','Documentation package always current'],time:'Eliminated scramble',money:'Avoided fines',roi:'First audit cycle',personas:['Compliance Officer','Managing Partner','CFO'],conns:['Regulatory Feeds','Document Management','Calendar','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.2',updated:'Mar 2026',changes:['Multi-state regulatory tracking','Auto-generated compliance reports','Staff training log integration','Audit response template library']},
+
+'tax-prep':{name:'Tax Preparation Accelerator',cat:'professional',catL:'Professional Services',tag:'10x more returns with the same team.',desc:'Extracts data from client documents, pre-fills tax forms, identifies deductions, flags inconsistencies, generates review packages for CPAs.',hook:'Tax season doesn\'t have to mean 80-hour weeks.',bS:'4–6 hrs per return',bI:['Manual document data entry','Deductions caught by memory','Review is line-by-line','Senior CPAs buried in prep work'],aS:'30–60 min per return',aI:['Documents auto-extracted and sorted','Deductions identified by AI','Pre-filled forms ready for review','CPAs focus on advisory, not entry'],time:'90% faster prep',money:'10x capacity',roi:'First filing season',personas:['CPA','Tax Preparer','Firm Owner'],conns:['Tax Software','Document Upload','Client Portal','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.4',updated:'Mar 2026',changes:['2026 tax code updates','Multi-state return support','K-1 and partnership handling','Client document request automation']},
+
+// ===========================
+// REAL ESTATE (5)
+// ===========================
+'listing-engine':{name:'Listing Content Engine',cat:'realestate',catL:'Real Estate',tag:'One listing, all platforms, 5 minutes.',desc:'Property photos + data → MLS description, social posts, email blasts, virtual tour scripts, neighborhood highlights. All platforms, one input.',hook:'12–16 hours a week on listing content. Get those hours back.',bS:'12–16 hrs/week',bI:['MLS description written from scratch','Rewrite for each platform','Tour scripts as afterthought','No time for neighborhood data'],aS:'5 min per listing',aI:['One input → all platforms','MLS, social, email, tour — done','Neighborhood auto-researched','More time for showings'],time:'12–16 hrs/week',money:'More listings = more closings',roi:'First listing',personas:['Agent','Broker','Marketing'],conns:['MLS','Social Media','Email Marketing','CRM'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'2.1',updated:'Mar 2026',changes:['Instagram Reels script format','Neighborhood school data added','Luxury listing tone option','Open house invite generator']},
+
+'lease-generator':{name:'Lease Agreement Generator',cat:'realestate',catL:'Real Estate',tag:'Jurisdiction-specific leases in minutes, not days.',desc:'Tenant info + property data → state-compliant lease with all addenda. Pet, parking, move-in, maintenance — everything included.',hook:'Stop paying $300 per lease review.',bS:'$300 + days',bI:['Attorney reviews each lease','Generic templates miss state reqs','Addenda added manually (or forgotten)','Signing delayed'],aS:'Minutes + $0',aI:['Input tenant + property details','State-specific lease generated','All addenda auto-included','Ready for DocuSign'],time:'98% faster',money:'$300+ per lease saved',roi:'First lease',personas:['Property Manager','Landlord'],conns:['Property Mgmt System','DocuSign','Templates'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.8',updated:'Feb 2026',changes:['Commercial lease support','Month-to-month conversion','Late fee calculator','Renewal reminder automation']},
+
+'tenant-bot':{name:'Tenant Communication Bot',cat:'realestate',catL:'Real Estate',tag:'80% of tenant requests handled without you.',desc:'Maintenance requests auto-categorized, prioritized, assigned to vendor, scheduled, followed up, closed. Tenants get instant responses.',hook:'50 units and your phone never stops. What if 80% handled themselves?',bS:'Phone rings all day',bI:['Every request is a phone call','Manual vendor assignment','Follow-up inconsistent','Tenants frustrated by delays'],aS:'80% auto-handled',aI:['Requests categorized by urgency','Right vendor auto-assigned','Status updates sent to tenant','You touch only the 20% that matter'],time:'80% auto-handled',money:'Lower turnover',roi:'First month',personas:['Property Manager','Landlord'],conns:['Tenant Portal','SMS/Email','Vendor Directory','Calendar'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.4',updated:'Mar 2026',changes:['Vendor rating system','Emergency escalation path','Photo upload for requests','Tenant satisfaction surveys']},
+
+'cma-report':{name:'CMA Report Generator',cat:'realestate',catL:'Real Estate',tag:'Comparative market analysis in 10 minutes.',desc:'Pulls comparable sales, active listings, market trends, and neighborhood data. Generates branded CMA report ready for seller presentations.',hook:'Your CMAs either look generic or take 3 hours. This fixes both.',bS:'2–3 hours each',bI:['Pull comps manually from MLS','Format in PowerPoint or Word','Missing market trend context','Generic-looking output'],aS:'10 minutes',aI:['Comps auto-pulled and ranked','Market trends included','Branded, professional layout','Seller-ready presentation'],time:'90% faster',money:'More listing appointments',roi:'First seller meeting',personas:['Agent','Broker'],conns:['MLS','Market Data','Google Docs','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.3',updated:'Mar 2026',changes:['Auto-adjustments for property differences','Market trend graphs','Neighborhood walkability scores','PDF and interactive web formats']},
+
+'property-inspection':{name:'Property Inspection Reporter',cat:'realestate',catL:'Real Estate',tag:'Walk the property. Let AI write the report.',desc:'Photos + voice notes from property walkthrough → formatted inspection report with findings, severity ratings, repair estimates, and timeline.',hook:'Inspection reports take 4 hours to write. Your inspector just freed their afternoon.',bS:'4+ hours per report',bI:['Notes scribbled during walkthrough','Photos unorganized','Report written back at office','Delayed delivery to clients'],aS:'Auto-generated on-site',aI:['Speak findings as you walk','Photos tagged to report sections','Severity and cost auto-estimated','Report delivered same day'],time:'80% faster',money:'More inspections per day',roi:'First inspection',personas:['Inspector','Property Manager','Agent'],conns:['Camera','Voice','Google Drive','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.1',updated:'Mar 2026',changes:['Repair cost estimator by region','Photo annotation overlay','Code violation reference','Recurring inspection templates']},
+
+// ===========================
+// HEALTHCARE (5)
+// ===========================
+'patient-intake':{name:'Patient Intake & Scheduling',cat:'healthcare',catL:'Healthcare',tag:'40% fewer no-shows. Zero phone tag.',desc:'Online intake → booking → pre-visit instructions → smart reminders → no-show prediction with overbooking optimization.',hook:'No-shows cost the average practice $150K/year.',bS:'25%+ no-show rate',bI:['Phone tag to schedule','Paper intake in waiting room','Manual reminders (or none)','No-shows waste slots + revenue'],aS:'15% no-show rate',aI:['Self-scheduling 24/7','Digital intake before arrival','Smart SMS + email reminders','AI predicts no-shows → optimized booking'],time:'Eliminated manual scheduling',money:'40% fewer no-shows',roi:'First month',personas:['Office Manager','Practice Owner'],conns:['EHR/EMR','SMS/Email','Scheduling','Patient Portal'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',note:'Designed with HIPAA considerations in mind.',v:'1.6',updated:'Mar 2026',changes:['No-show prediction model v2','Waitlist auto-fill','Insurance pre-verification','Multi-provider scheduling']},
+
+'visit-summary':{name:'Visit Summary Generator',cat:'healthcare',catL:'Healthcare',tag:'Give doctors 2 hours back every day.',desc:'Physician speaks naturally. AI generates formatted visit summaries, referral letters, follow-up instructions. Review and approve.',hook:'Doctors spend 2 hours/day on documentation. Give them that time back.',bS:'2+ hrs/day on notes',bI:['Notes typed between patients','Documentation done after hours','Referral letters delayed days','Generic patient instructions'],aS:'Voice → done',aI:['Doctor speaks naturally','Visit summary generated instantly','Referrals ready same day','Instructions personalized'],time:'2 hours/day',money:'More patients + less burnout',roi:'First clinic day',personas:['Physician','Practice Owner'],conns:['Voice','EHR/EMR','Fax','Patient Portal'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',note:'HIPAA considerations apply.',v:'1.3',updated:'Feb 2026',changes:['Improved medical terminology accuracy','Specialty-specific templates','Follow-up scheduling integration','Patient instruction readability scoring']},
+
+'pre-auth':{name:'Insurance Pre-Auth Assistant',cat:'healthcare',catL:'Healthcare',tag:'Stop losing $50K/year to paperwork failures.',desc:'Extracts procedure codes, cross-references coverage, drafts pre-auth requests, tracks approvals. Catches gaps before submission.',hook:'Most denied claims aren\'t medical — they\'re paperwork failures.',bS:'$50K+ lost/year',bI:['Manual code extraction','Coverage checked by memory','Error-prone pre-auth forms','Denied claims go unrecovered'],aS:'Claims recovered',aI:['Codes auto-extracted from notes','Coverage cross-referenced per insurer','Complete pre-auth drafted','Approval tracked with alerts'],time:'75% faster submissions',money:'$50K+/year recovered',roi:'First billing cycle',personas:['Billing Staff','Office Manager'],conns:['EHR/EMR','Insurance Portals','Billing System'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',note:'Compliance considerations apply.',v:'1.2',updated:'Mar 2026',changes:['Payer-specific form templates','Denial appeal draft generator','Status tracking dashboard','CPT/ICD-10 code validation']},
+
+'hipaa-training':{name:'HIPAA Compliance Tracker',cat:'healthcare',catL:'Healthcare',tag:'Never fail a HIPAA audit again.',desc:'Tracks staff training completion, monitors access logs for violations, generates incident reports, maintains audit-ready documentation.',hook:'A single HIPAA violation starts at $100. Willful neglect? $1.9M.',bS:'Manual compliance tracking',bI:['Training tracked in spreadsheets','Access violations found during audits','Incident reports written after the fact','Audit prep takes weeks'],aS:'Continuous compliance',aI:['Training status dashboard — real time','Access anomalies flagged instantly','Incident reports auto-generated','Audit package always current'],time:'Eliminated audit prep',money:'Avoided violations',roi:'First audit',personas:['Compliance Officer','Practice Owner','Office Manager'],conns:['HRIS','Access Logs','Training Platform','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',note:'Built for HIPAA-regulated environments.',v:'1.1',updated:'Mar 2026',changes:['2026 HIPAA rule updates','Breach notification workflow','Business associate agreement tracker','Risk assessment templates']},
+
+'medical-inventory':{name:'Medical Supply Inventory',cat:'healthcare',catL:'Healthcare',tag:'Never run out. Never over-order.',desc:'Tracks medical supply levels, predicts usage based on appointment volume, auto-generates reorder alerts, tracks expiration dates.',hook:'Running out of supplies mid-procedure isn\'t just inconvenient — it\'s dangerous.',bS:'Manual counts + surprises',bI:['Physical inventory counts monthly','Supplies run out mid-week','Expired items discovered too late','Over-ordering ties up cash'],aS:'Predictive inventory',aI:['Real-time supply levels','Usage predicted from schedule','Auto-reorder at optimal thresholds','Expiration alerts 90 days out'],time:'Eliminated stockouts',money:'20% inventory cost reduction',roi:'First quarter',personas:['Office Manager','Nurse Manager','Practice Owner'],conns:['Supplier Portals','Scheduling System','Spreadsheets','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',note:'Designed for clinical supply management.',v:'1.0',updated:'Mar 2026',changes:['Initial release','Barcode scan support','Multi-location tracking','Supplier price comparison']},
+
+// ===========================
+// LOGISTICS & DISTRIBUTION (4)
+// ===========================
+'route-optimization':{name:'Route Optimization Engine',cat:'logistics',catL:'Logistics',tag:'15% fewer miles. Same deliveries.',desc:'Optimizes delivery routes across fleet in real time. Accounts for traffic, time windows, vehicle capacity, and driver hours. Re-routes on the fly.',hook:'Fuel is your second biggest cost. Stop wasting it on bad routes.',bS:'Manual route planning',bI:['Routes planned by gut feel','Drivers zigzag across zones','No real-time adjustment','Fuel costs climbing monthly'],aS:'AI-optimized daily',aI:['Optimal routes calculated in seconds','Real-time re-routing for disruptions','15% fewer miles, same deliveries','Fuel savings hit P&L immediately'],time:'1+ hr/day saved per driver',money:'15% fuel reduction',roi:'First delivery week',personas:['Fleet Manager','Dispatcher','Ops Director'],conns:['GPS/Telematics','Google Maps','Scheduling','ERP'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.4',updated:'Mar 2026',changes:['Multi-stop optimization up to 200 stops','EV range-aware routing','Customer notification ETA','Driver break compliance']},
+
+'inventory-forecast':{name:'Inventory Forecast Planner',cat:'logistics',catL:'Logistics',tag:'Order what you\'ll sell. Not what you think you\'ll sell.',desc:'Analyzes historical sales, seasonality, trends, and lead times to generate optimal reorder quantities and timing. Reduces both stockouts and overstock.',hook:'Overstock costs you storage. Stockouts cost you customers. Both are preventable.',bS:'Gut-feel ordering',bI:['Over-order "just in case"','Stockouts from seasonal spikes','Dead inventory taking up space','Cash tied up in excess stock'],aS:'Demand-driven ordering',aI:['Demand predicted by SKU','Reorder points optimized','Seasonal spikes anticipated','Cash freed from excess inventory'],time:'Automated forecasting',money:'30% inventory reduction',roi:'First quarter',personas:['Inventory Manager','Ops Director','Purchasing'],conns:['ERP','POS / Sales Data','Supplier Portals','Spreadsheets'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.2',updated:'Mar 2026',changes:['Seasonal trend detection','Supplier lead time learning','Safety stock calculator','ABC analysis automation']},
+
+'shipment-tracking':{name:'Shipment Tracking & Alerts',cat:'logistics',catL:'Logistics',tag:'Every shipment. Every carrier. One view.',desc:'Consolidates tracking across all carriers into one dashboard. Proactive alerts for delays, exceptions, and delivery confirmations. Customer notifications automated.',hook:'Your customers shouldn\'t have to ask "where\'s my order?"',bS:'Check 5 carrier sites',bI:['Each carrier has separate tracking','Delays discovered when customers call','No proactive communication','Manual status updates'],aS:'Unified dashboard',aI:['All carriers in one view','Delay alerts before customers notice','Auto-notifications at every stage','Exception handling workflow'],time:'80% fewer status calls',money:'Higher customer satisfaction',roi:'First shipment cycle',personas:['Logistics Coordinator','Customer Service','Ops'],conns:['Carrier APIs','CRM','Email/SMS','ERP'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.3',updated:'Mar 2026',changes:['20+ carrier integrations','Delay prediction model','Customer self-service portal','Proof of delivery capture']},
+
+'warehouse-pick':{name:'Warehouse Pick Optimizer',cat:'logistics',catL:'Logistics',tag:'30% more orders picked per shift.',desc:'Optimizes pick paths through warehouse, batches orders intelligently, reduces walk time, and sequences picks for efficient packing.',hook:'Your pickers walk 10+ miles per shift. Half of it is backtracking.',bS:'10+ miles/shift walking',bI:['Random pick order','Backtracking across warehouse','Single-order picks','Packing errors from poor sequencing'],aS:'Optimized pick paths',aI:['Shortest path calculated per batch','Orders batched by zone','Walk time reduced 40%','30% more orders per shift'],time:'30% throughput increase',money:'Lower labor cost per order',roi:'First optimized shift',personas:['Warehouse Manager','Ops Director','Fulfillment Lead'],conns:['WMS','Order Management','Barcode/RFID','ERP'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.1',updated:'Mar 2026',changes:['Multi-zone batching','Wave planning automation','Pick accuracy scoring','Returns processing integration']},
+
+// ===========================
+// HOSPITALITY & FOOD (4)
+// ===========================
+'menu-engineering':{name:'Menu Engineering Analyzer',cat:'hospitality',catL:'Hospitality',tag:'Know exactly which dishes make money.',desc:'Analyzes every menu item by food cost, popularity, and profit margin. Recommends pricing changes, item positioning, and what to cut.',hook:'30% of your menu items are losing money. Do you know which ones?',bS:'Menu priced by gut feel',bI:['Food costs estimated, not calculated','Popular items may be unprofitable','Menu unchanged for years','Pricing doesn\'t reflect current costs'],aS:'Data-driven menu',aI:['Every item analyzed: cost, margin, popularity','Stars vs. dogs identified instantly','Pricing recommendations backed by data','Menu optimized quarterly'],time:'Hours of analysis → minutes',money:'8–12% margin improvement',roi:'First menu revision',personas:['Restaurant Owner','Chef','GM'],conns:['POS System','Supplier Invoices','Spreadsheets'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.3',updated:'Mar 2026',changes:['Ingredient cost auto-update from invoices','Seasonal menu suggestions','Competitor pricing analysis','Visual menu layout optimizer']},
+
+'reservation-optimizer':{name:'Reservation & Table Optimizer',cat:'hospitality',catL:'Hospitality',tag:'Seat 20% more covers with the same tables.',desc:'AI-optimized table assignment, turn time prediction, waitlist management, and no-show prediction. Maximizes revenue per seat per hour.',hook:'Empty tables during peak hours is money evaporating.',bS:'Manual seating chart',bI:['Host seats by habit, not optimization','2-tops at 4-top tables','No-shows leave gaps','Walk-aways from long waits'],aS:'AI-optimized seating',aI:['Tables matched to party size optimally','Turn times predicted per party type','No-show prediction → strategic overbooking','Waitlist managed with accurate ETAs'],time:'More turns per night',money:'20% more covers',roi:'First weekend service',personas:['Restaurant Owner','GM','Host/Hostess'],conns:['Reservation System','POS','SMS','Google Business'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.2',updated:'Mar 2026',changes:['Party size prediction from reservations','VIP preference memory','Special event mode','Revenue per seat-hour dashboard']},
+
+'food-cost':{name:'Food Cost Controller',cat:'hospitality',catL:'Hospitality',tag:'Know your food cost daily, not monthly.',desc:'Tracks food costs in real time by cross-referencing POS sales with inventory and invoices. Alerts on waste, theft, and supplier price increases.',hook:'You find out about food cost problems 30 days too late. That changes now.',bS:'Monthly P&L surprise',bI:['Food cost calculated at month-end','Waste untracked','Supplier price creep unnoticed','Portion inconsistency hidden'],aS:'Daily food cost tracking',aI:['Real-time cost vs. revenue','Waste tracked by category','Supplier price alerts on delivery','Portion variance flagged'],time:'Real-time vs. 30-day lag',money:'3–5% food cost reduction',roi:'First month',personas:['Owner','Chef','GM','Bookkeeper'],conns:['POS','Supplier Invoices','Inventory','Accounting'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.1',updated:'Mar 2026',changes:['Invoice photo scan for price tracking','Waste log mobile input','Recipe cost calculator','Theoretical vs. actual food cost report']},
+
+'review-responder':{name:'Guest Review Responder',cat:'hospitality',catL:'Hospitality',tag:'Every review answered. Your voice. Your tone.',desc:'Monitors reviews across Google, Yelp, TripAdvisor, and delivery apps. Drafts personalized responses matching your brand voice. Flags urgent issues.',hook:'86% of consumers read reviews for local businesses. Your responses matter.',bS:'Reviews pile up unanswered',bI:['Reviews checked sporadically','Generic copy-paste responses','Negative reviews fester publicly','No tracking on review trends'],aS:'Every review, same day',aI:['All platforms monitored in real time','Personalized responses drafted instantly','Negative reviews flagged for owner','Sentiment trends tracked over time'],time:'90% faster responses',money:'Higher ratings = more customers',roi:'First week',personas:['Owner','GM','Marketing'],conns:['Google Business','Yelp','TripAdvisor','DoorDash / UberEats'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.4',updated:'Mar 2026',changes:['DoorDash and UberEats integration','Brand voice calibration','Competitive review benchmarking','Monthly sentiment report']},
+
+// ===========================
+// RETAIL & E-COMMERCE (4)
+// ===========================
+'product-descriptions':{name:'Product Description Engine',cat:'retail',catL:'Retail',tag:'1,000 product pages. One afternoon.',desc:'Photos + basic specs → SEO-optimized product descriptions, bullet points, meta tags, and A+ content. Consistent brand voice at scale.',hook:'Writing product descriptions one at a time doesn\'t scale. This does.',bS:'20–30 min per product',bI:['Copywriter writes one at a time','Inconsistent tone across catalog','No SEO optimization','New products sit unlisted for weeks'],aS:'2 min per product',aI:['Photo + specs → complete listing','SEO keywords auto-researched','Brand voice consistent across catalog','New products live same day'],time:'95% faster',money:'Faster time to revenue',roi:'First product batch',personas:['E-Commerce Manager','Marketing','Merchandiser'],conns:['Shopify / WooCommerce','Product Database','Google Keyword Tools'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.5',updated:'Mar 2026',changes:['Amazon A+ content format','Multi-language descriptions','Size guide generator','Comparison chart builder']},
+
+'returns-processor':{name:'Returns & Refund Processor',cat:'retail',catL:'Retail',tag:'Returns processed in minutes, not days.',desc:'Automates return authorization, refund processing, inventory restocking, and customer communication. Identifies return abuse patterns.',hook:'Returns are inevitable. Slow processing is not.',bS:'3–5 days per return',bI:['Manual return authorization','Refund processing delayed','Inventory not updated','Customers wait and complain'],aS:'Same-day processing',aI:['Auto-authorized against policy','Refund triggered immediately','Inventory updated in real time','Customer notified at every step'],time:'80% faster',money:'Higher customer retention',roi:'First return cycle',personas:['Customer Service','Ops Manager','E-Commerce Director'],conns:['Shopify / WooCommerce','Payment Gateway','Inventory','Email/SMS'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.2',updated:'Mar 2026',changes:['Return abuse detection','Restocking workflow','Exchange recommendation engine','Return reason analytics']},
+
+'reorder-predictor':{name:'Inventory Reorder Predictor',cat:'retail',catL:'Retail',tag:'Never stock out on your best sellers.',desc:'Analyzes sales velocity, seasonality, and supplier lead times per SKU. Generates optimal reorder points and quantities. Alerts before stockouts.',hook:'A stockout on your #1 SKU costs more than the product — it costs the customer.',bS:'Stockouts + overstock',bI:['Reorder points set manually','Best sellers run out','Seasonal demand catches you off guard','Dead stock accumulates'],aS:'Predictive reordering',aI:['Reorder points calculated per SKU','Sales velocity tracked daily','Seasonal demand anticipated','Dead stock identified early'],time:'Automated inventory planning',money:'25% fewer stockouts',roi:'First month',personas:['Inventory Manager','Buyer','E-Commerce Director'],conns:['Shopify / WooCommerce','Supplier Portals','POS','ERP'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.3',updated:'Mar 2026',changes:['Multi-channel inventory sync','Supplier scorecard','Promotion impact forecasting','Bundle inventory tracking']},
+
+'customer-segments':{name:'Customer Segment Profiler',cat:'retail',catL:'Retail',tag:'Stop marketing to everyone. Start marketing to someone.',desc:'Analyzes purchase history, browsing behavior, and demographics to create actionable customer segments. Generates targeted campaign recommendations.',hook:'Sending the same email to your entire list is leaving money on the table.',bS:'One-size-fits-all marketing',bI:['Same promotion to everyone','No understanding of customer types','High unsubscribe rates','Low email conversion'],aS:'Targeted segments',aI:['Customers grouped by behavior','VIPs, at-risk, and new customers identified','Campaign recommendations per segment','Conversion rates improve 2–3x'],time:'Automated segmentation',money:'2–3x email conversion',roi:'First targeted campaign',personas:['Marketing Director','E-Commerce Manager','CEO'],conns:['Shopify / WooCommerce','Email Marketing','Google Analytics','CRM'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.2',updated:'Mar 2026',changes:['RFM analysis automation','Churn prediction model','Lookalike audience export','Lifetime value calculator']},
+
+// ===========================
+// HOME SERVICES (4)
+// ===========================
+'service-quote':{name:'Service Quote Generator',cat:'homeservices',catL:'Home Services',tag:'Accurate quotes from the truck, not the office.',desc:'Technician inputs job details on-site → professional branded quote generated instantly. Includes materials, labor, warranty terms, and financing options.',hook:'The longer it takes to send the quote, the less likely they say yes.',bS:'Quote sent days later',bI:['Tech takes notes, office writes quote','1–3 day delay','Inconsistent pricing across techs','Customers get competitor quotes first'],aS:'Quote in 2 minutes on-site',aI:['Tech inputs details on phone/tablet','Branded quote generated instantly','Standard pricing enforced','Customer signs on the spot'],time:'Instant vs. 1–3 days',money:'Higher close rate',roi:'First on-site quote',personas:['Technician','Owner','Office Manager'],conns:['CRM','Pricing Database','Email/SMS','Payment'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.4',updated:'Mar 2026',changes:['Good/better/best pricing tiers','Financing option display','Photo attachment to quotes','E-signature on mobile']},
+
+'tech-dispatch':{name:'Technician Dispatch & Routing',cat:'homeservices',catL:'Home Services',tag:'Right tech. Right time. Shortest drive.',desc:'AI dispatching that matches technicians to jobs by skill, location, parts inventory, and availability. Optimizes routes across full-day schedule.',hook:'Your best HVAC tech shouldn\'t drive 45 minutes to a simple filter change.',bS:'Manual whiteboard dispatch',bI:['Dispatcher assigns by gut feel','Skill mismatch wastes visits','Long drives between jobs','Callbacks from wrong tech sent'],aS:'AI-matched dispatch',aI:['Tech matched by skill + proximity','Routes optimized for minimal drive','Parts inventory checked pre-dispatch','First-visit resolution rate improved'],time:'+2 jobs/tech/day',money:'Lower fuel + callbacks',roi:'First optimized day',personas:['Dispatcher','Ops Manager','Owner'],conns:['Scheduling','GPS/Maps','Parts Inventory','CRM'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.3',updated:'Mar 2026',changes:['Parts inventory awareness','Customer communication ETA','Emergency priority override','Seasonal demand balancing']},
+
+'review-reputation':{name:'Review & Reputation Manager',cat:'homeservices',catL:'Home Services',tag:'5-star reputation on autopilot.',desc:'Automatically requests reviews from satisfied customers at the right moment. Monitors and responds to all reviews. Alerts on negative reviews for owner action.',hook:'90% of customers read reviews before calling a home service company.',bS:'Few reviews, no system',bI:['Happy customers never asked for reviews','Negative reviews unanswered','No systematic follow-up','Competitors have 10x more reviews'],aS:'Systematic review engine',aI:['Happy customers auto-asked for reviews','All reviews monitored and responded to','Negative reviews flagged within minutes','Review count grows steadily'],time:'Automated reputation',money:'More inbound leads',roi:'First month',personas:['Owner','Marketing','Office Manager'],conns:['Google Business','Yelp','Nextdoor','CRM','SMS/Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.5',updated:'Mar 2026',changes:['Nextdoor integration','Review timing optimization','Photo review requests','Competitor review benchmarking']},
+
+'seasonal-marketing':{name:'Seasonal Campaign Automator',cat:'homeservices',catL:'Home Services',tag:'Right service. Right season. Right customer.',desc:'Automatically launches seasonal campaigns — HVAC tune-ups in spring/fall, plumbing winterization, pest control in summer. Targets past customers with service history.',hook:'Your customers need seasonal service. They just forgot to call you.',bS:'Manual seasonal outreach',bI:['Remember to send mailers (or don\'t)','Same message to everyone','No targeting by service history','Competitors reach them first'],aS:'Auto seasonal campaigns',aI:['Campaigns auto-launch by season','Targeted by past service history','Multi-channel: email, SMS, mailer','Booking link included — frictionless'],time:'Set it and forget it',money:'25% more seasonal bookings',roi:'First season',personas:['Owner','Marketing','Office Manager'],conns:['CRM','Email/SMS','Direct Mail API','Calendar'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.1',updated:'Mar 2026',changes:['Service history targeting','Multi-channel orchestration','Early-bird discount automation','Neighborhood cluster campaigns']},
+
+// ===========================
+// INSURANCE & FINANCIAL (4)
+// ===========================
+'policy-comparison':{name:'Policy Comparison Analyzer',cat:'insurance',catL:'Insurance',tag:'Compare 20 policies in 5 minutes.',desc:'Ingests policy documents, extracts key terms, and generates side-by-side comparisons. Highlights coverage gaps, exclusions, and pricing differences.',hook:'Your clients don\'t want 20 policy options. They want the right one — explained clearly.',bS:'Hours per comparison',bI:['Read each policy manually','Miss key exclusion differences','Comparison docs are messy','Clients confused by options'],aS:'5-minute comparison',aI:['Policies auto-extracted and parsed','Side-by-side with key differences highlighted','Coverage gaps flagged','Client-ready comparison report'],time:'90% faster',money:'Better recommendations',roi:'First client comparison',personas:['Agent','Broker','Underwriter'],conns:['Policy PDFs','CRM','Email','Rating Tools'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.3',updated:'Mar 2026',changes:['Auto-extraction from 50+ carrier formats','Gap analysis engine','Premium vs. coverage scoring','Client presentation template']},
+
+'claims-processor':{name:'Claims Processing Accelerator',cat:'insurance',catL:'Insurance',tag:'Claims adjudicated in hours, not weeks.',desc:'Automates claims intake, document verification, damage assessment, coverage matching, and payment authorization. Flags fraud indicators.',hook:'Every day a claim sits unprocessed costs you policyholder trust.',bS:'2–4 weeks per claim',bI:['Documents collected manually','Coverage verified by hand','Damage assessment delayed','Policyholder calls for status'],aS:'Hours to adjudicate',aI:['Documents auto-ingested and verified','Coverage matched instantly','Damage assessment auto-estimated','Policyholder notified at every step'],time:'80% faster adjudication',money:'Lower loss adjustment expense',roi:'First claim batch',personas:['Claims Manager','Adjuster','Ops Director'],conns:['Claims System','Document Management','Payment System','Email/SMS'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.2',updated:'Mar 2026',changes:['Photo-based damage estimation','Fraud indicator scoring','Subrogation opportunity detection','Policyholder self-service portal']},
+
+'renewal-retention':{name:'Renewal & Retention Engine',cat:'insurance',catL:'Insurance',tag:'Catch at-risk policies before they lapse.',desc:'Monitors renewal timelines, identifies at-risk policies, generates personalized retention offers, and automates the renewal workflow.',hook:'A 5% increase in retention = 25% increase in profit. The math is clear.',bS:'Reactive renewals',bI:['Renewals tracked in spreadsheet','At-risk policies identified too late','Generic renewal letters','Lost policies to competitors'],aS:'Proactive retention',aI:['All renewals tracked with alerts','At-risk signals detected 90 days out','Personalized retention offers generated','Renewal workflow automated end-to-end'],time:'Automated renewal process',money:'15% better retention',roi:'First renewal cycle',personas:['Agent','Account Manager','Retention Specialist'],conns:['Policy Management','CRM','Email/SMS','Rating Tools'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.1',updated:'Mar 2026',changes:['Churn prediction model','Competitive re-quote automation','Multi-policy bundle suggestions','Win-back campaign for lapsed policies']},
+
+'underwriting-assist':{name:'Underwriting Assistant',cat:'insurance',catL:'Insurance',tag:'Submissions reviewed in minutes, not days.',desc:'Pre-screens applications, pulls third-party data, calculates preliminary risk scores, and generates underwriting summaries with recommendations.',hook:'Your underwriters spend 70% of their time on data gathering. Free them to make decisions.',bS:'3–5 days per submission',bI:['Manual data gathering','Third-party reports ordered separately','Risk assessed inconsistently','Underwriter backlog grows'],aS:'Minutes per submission',aI:['Data auto-gathered from all sources','Preliminary risk score calculated','Underwriting summary generated','Underwriter reviews and decides'],time:'90% faster screening',money:'More policies written',roi:'First batch of submissions',personas:['Underwriter','Ops Manager','Agency Owner'],conns:['Application Portal','Credit/MVR/Claims Databases','Rating Engine','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.0',updated:'Mar 2026',changes:['Initial release','Multi-line risk scoring','Appetite matching','Declination letter generator']},
+
+// ===========================
+// EDUCATION & TRAINING (4)
+// ===========================
+'curriculum-builder':{name:'Curriculum Builder',cat:'education',catL:'Education',tag:'Standards-aligned lesson plans in minutes.',desc:'Input learning objectives and grade level → complete lesson plans, activities, assessments, and differentiation strategies. Aligned to state standards.',hook:'Teachers spend 7+ hours/week on lesson planning. Give them that time for teaching.',bS:'7+ hrs/week planning',bI:['Lesson plans written from scratch','Standards alignment checked manually','Differentiation is an afterthought','Resources scattered across sites'],aS:'Minutes per lesson',aI:['Objectives → full lesson plan','Auto-aligned to state standards','Differentiation built in','Resources curated and linked'],time:'80% less planning time',money:'More teaching time',roi:'First lesson plan',personas:['Teacher','Curriculum Director','Instructional Coach'],conns:['Standards Database','Google Classroom','LMS','Resource Libraries'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.4',updated:'Mar 2026',changes:['NGSS and Common Core auto-alignment','Assessment rubric generator','Multilingual support','Parent communication templates']},
+
+'student-progress':{name:'Student Progress Tracker',cat:'education',catL:'Education',tag:'Every student\'s trajectory, visible at a glance.',desc:'Aggregates grades, assessments, attendance, and behavior data. Identifies at-risk students early, generates intervention recommendations, and automates parent updates.',hook:'You can\'t help a struggling student you don\'t see. This makes them visible.',bS:'Data in 6 systems',bI:['Grades, attendance, behavior — all separate','At-risk students identified too late','Progress reports take hours','Parent communication inconsistent'],aS:'Unified student view',aI:['All data in one dashboard','At-risk alerts triggered automatically','Intervention recommendations generated','Parent updates sent automatically'],time:'Hours of reporting eliminated',money:'Better student outcomes',roi:'First grading period',personas:['Teacher','Counselor','Principal','Dean'],conns:['SIS','LMS','Assessment Tools','Email/SMS'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.2',updated:'Mar 2026',changes:['Behavioral pattern detection','IEP goal tracking','Attendance trend analysis','Multi-language parent communications']},
+
+'course-content':{name:'Course Content Generator',cat:'education',catL:'Education',tag:'One topic. Full course. Instant.',desc:'Input topic and audience → structured course with modules, video scripts, quizzes, discussion prompts, and supplementary materials.',hook:'Building a training course shouldn\'t take 6 weeks.',bS:'4–6 weeks per course',bI:['Content created from scratch','Quizzes an afterthought','No consistent structure','Revision cycle takes weeks'],aS:'1–2 days per course',aI:['Full course structure generated','Quizzes and assessments included','Video scripts ready for recording','Consistent, professional format'],time:'90% faster',money:'Train faster, earn faster',roi:'First course launch',personas:['Training Director','Course Creator','HR'],conns:['LMS','Video Platform','Google Docs','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.3',updated:'Mar 2026',changes:['SCORM export support','Interactive scenario builder','Knowledge check templates','Completion certificate generator']},
+
+'enrollment-funnel':{name:'Enrollment Funnel Optimizer',cat:'education',catL:'Education',tag:'Fill every seat. Every semester.',desc:'Tracks prospective students from inquiry to enrollment. Automates follow-ups, personalizes communication, predicts enrollment likelihood, and identifies drop-off points.',hook:'60% of inquiries never enroll. Most of them just needed one more touchpoint.',bS:'60% inquiry-to-enrollment drop',bI:['Leads tracked in spreadsheet','Follow-up inconsistent','No personalization','Drop-off reasons unknown'],aS:'Optimized funnel',aI:['Every inquiry tracked and scored','Automated personalized follow-ups','Enrollment likelihood predicted','Drop-off points identified and fixed'],time:'Automated nurturing',money:'30% more enrollments',roi:'First enrollment cycle',personas:['Admissions Director','Marketing','Dean'],conns:['CRM','Website Forms','Email/SMS','Student Portal'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.1',updated:'Mar 2026',changes:['Application completion nudges','Financial aid calculator integration','Virtual tour scheduling','Peer mentor matching']},
+
+// ===========================
+// PEOPLE & HR (8)
+// ===========================
+'pip-generator':{name:'PIP & Coaching Report Generator',cat:'peoplehr',catL:'People & HR',tag:'Objective PIPs backed by data, not emotion.',desc:'Pulls performance data from Airtable, Monday, ClickUp, Jira, and meeting transcripts from Otter AI / Read AI. Cross-references task completion rates, missed deadlines, attendance patterns, and manager feedback to generate objective Performance Improvement Plans with specific, measurable milestones — plus ongoing coaching reports that track progress.',hook:'Subjective PIPs get challenged. Data-backed PIPs get results — or protect the company.',bS:'Subjective, inconsistent PIPs',bI:['Manager writes PIP from memory and frustration','No data-backed performance benchmarks','Goals vague — "improve communication"','Legal exposure from biased documentation','Coaching conversations undocumented','Weeks to gather supporting evidence'],aS:'Objective, airtight PIPs in 30 min',aI:['Performance data pulled from all work tools automatically','Task completion, deadlines, attendance — all quantified','Specific measurable milestones auto-generated','Coaching report history attached as evidence trail','Legal-ready documentation with timestamps','Progress tracked against benchmarks weekly'],time:'90% faster PIP creation',money:'Reduced legal exposure',roi:'First PIP cycle',personas:['HR Director','Manager','VP of People','Legal'],conns:['Airtable','Monday.com','ClickUp','Jira','Otter AI','Read AI','Gmail','HRIS','Google Calendar'],svc:'OpenClaw + Claude Cowork',price:'From $2,499',tl:'5–7 days',v:'1.4',updated:'Mar 2026',changes:['Otter AI transcript integration','ClickUp velocity scoring','Coaching cadence templates','Legal review checklist per state']},
+
+'performance-dashboard':{name:'Employee Performance Dashboard',cat:'peoplehr',catL:'People & HR',tag:'Every employee\'s output — visible, objective, real-time.',desc:'Aggregates work output across project management tools, code repos, CRM activity, email volume, meeting participation, and task completion. Generates per-employee and per-team performance scorecards without manual input.',hook:'You can\'t manage what you can\'t measure. And right now, you\'re guessing.',bS:'Annual reviews from memory',bI:['Performance assessed once a year','Manager recall bias dominates','No cross-tool visibility','Top performers invisible, underperformers hidden'],aS:'Real-time performance visibility',aI:['Activity pulled from all work tools','Scorecards generated automatically','Trends visible over 30/60/90 days','Top performers and at-risk employees surfaced'],time:'Eliminated manual tracking',money:'Better retention + faster action',roi:'First 30-day report',personas:['HR Director','Manager','COO','VP of People'],conns:['Jira','Monday.com','ClickUp','Airtable','Gmail','Slack','CRM','GitHub'],svc:'OpenClaw + Claude Cowork',price:'From $2,499',tl:'5–7 days',v:'1.2',updated:'Mar 2026',changes:['GitHub commit activity tracking','Slack engagement scoring','Cross-team comparison view','Customizable KPI weights']},
+
+'one-on-one-engine':{name:'1:1 Meeting Prep & Summary',cat:'peoplehr',catL:'People & HR',tag:'Every 1:1 prepared. Every action tracked.',desc:'Before each 1:1, pulls recent work output, open tasks, missed deadlines, and prior action items from PM tools and Otter AI / Read AI transcripts. After the meeting, generates a summary with new action items and tracks follow-through.',hook:'Most 1:1s are unprepared and untracked. That\'s not management — that\'s chatting.',bS:'Wing it every week',bI:['No prep — "so how\'s it going?"','Prior action items forgotten','No record of what was discussed','Follow-through is zero'],aS:'Prepared + documented',aI:['Pre-meeting brief with context auto-generated','Prior commitments surfaced with status','Meeting transcript → summary + actions','Action items tracked to next 1:1'],time:'15 min prep eliminated',money:'Better manager effectiveness',roi:'First 1:1 cycle',personas:['Manager','Director','VP','HR Business Partner'],conns:['Otter AI','Read AI','Google Calendar','Monday.com','ClickUp','Jira','Slack','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.3',updated:'Mar 2026',changes:['Career development tracking','Mood/sentiment trend from transcripts','Skip-level meeting support','Goal alignment to company OKRs']},
+
+'hiring-pipeline':{name:'Hiring Pipeline Accelerator',cat:'peoplehr',catL:'People & HR',tag:'Post to hired in half the time.',desc:'Generates job descriptions from role requirements, screens resumes against criteria, creates structured interview scorecards, sends rejection/advancement emails, and tracks pipeline metrics.',hook:'Your best candidates accept other offers while you\'re still scheduling interviews.',bS:'45 days avg time-to-hire',bI:['Job descriptions written from scratch','Resume screening is manual','Interview questions inconsistent','Candidates ghost from slow process'],aS:'22 days avg time-to-hire',aI:['Job descriptions generated in minutes','Resumes auto-screened and ranked','Structured scorecards for every interview','Automated candidate communication at every stage'],time:'50% faster hiring',money:'Better hires, fewer mis-hires',roi:'First open role',personas:['HR Director','Hiring Manager','Recruiter','Founder'],conns:['ATS','LinkedIn','Gmail','Calendar','Slack','Airtable'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.5',updated:'Mar 2026',changes:['Bias detection in job descriptions','Skills-based screening model','Interview scheduling automation','Offer letter generator']},
+
+'exit-interview':{name:'Exit Interview Analyzer',cat:'peoplehr',catL:'People & HR',tag:'Stop losing people for the same reasons.',desc:'Processes exit interview transcripts and survey responses. Identifies recurring themes, departmental patterns, manager-specific issues, and actionable retention insights. Quarterly trend reports for leadership.',hook:'Every departure tells you something. Most companies never listen.',bS:'Exit data filed and forgotten',bI:['Exit interviews are a checkbox','Data sits in a folder unanalyzed','Same issues cause repeated departures','Leadership hears about problems anecdotally'],aS:'Patterns surfaced automatically',aI:['Transcripts and surveys analyzed by AI','Themes clustered: management, comp, culture, growth','Department and manager patterns flagged','Quarterly retention insights for leadership'],time:'Automated analysis',money:'Lower turnover costs',roi:'First quarterly report',personas:['HR Director','VP of People','CEO','CHRO'],conns:['Otter AI','Read AI','Survey Tools','HRIS','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.1',updated:'Mar 2026',changes:['Manager-level trend reports','Glassdoor sentiment correlation','Stay interview template','Retention risk predictor']},
+
+'team-capacity':{name:'Team Capacity Planner',cat:'peoplehr',catL:'People & HR',tag:'See who\'s overloaded before they burn out.',desc:'Analyzes task loads, hours logged, sprint velocity, and meeting density across teams. Flags burnout risk, identifies underutilized capacity, and recommends rebalancing.',hook:'Burnout doesn\'t announce itself. By the time someone says something, they\'re already leaving.',bS:'Invisible workloads',bI:['No visibility into actual capacity','Overloaded employees suffer quietly','Underutilized team members unnoticed','Burnout discovered at resignation'],aS:'Real-time capacity view',aI:['Workload quantified across all tools','Burnout risk scored per employee','Rebalancing recommendations generated','Utilization tracked against healthy thresholds'],time:'Proactive vs. reactive',money:'Reduced turnover from burnout',roi:'First capacity report',personas:['Director','VP of Ops','HR','Project Manager'],conns:['Monday.com','ClickUp','Jira','Google Calendar','Harvest / Toggl','Slack'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.2',updated:'Mar 2026',changes:['Meeting load analysis','Sprint velocity trending','PTO impact forecasting','Team health score']},
+
+'employee-recognition':{name:'Employee Recognition Engine',cat:'peoplehr',catL:'People & HR',tag:'Wins surfaced. Recognition automated. Culture built.',desc:'Scans project completions, customer praise, peer mentions, and milestone achievements across work tools. Generates recognition nominations, drafts shout-outs for Slack/email, and tracks recognition equity across teams.',hook:'Your top performers don\'t need more work. They need to know you noticed.',bS:'Recognition is ad hoc',bI:['Wins go unnoticed unless self-reported','Same people recognized, others invisible','No system for peer recognition','Recognition inequity breeds resentment'],aS:'Wins auto-surfaced',aI:['Achievements detected from work tools','Recognition drafted for manager approval','Posted to Slack, email, or meeting agendas','Equity tracked — no one left out'],time:'Automated recognition',money:'Higher engagement + retention',roi:'First recognition cycle',personas:['Manager','HR Director','VP of People','CEO'],conns:['Slack','Monday.com','ClickUp','Jira','CRM','Email','HRIS'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.0',updated:'Mar 2026',changes:['Initial release','Peer nomination workflow','Monthly recognition digest','Anniversary and milestone auto-detect']},
+
+'comp-benchmarker':{name:'Compensation Benchmarker',cat:'peoplehr',catL:'People & HR',tag:'Pay right. Retain talent. Stop guessing.',desc:'Pulls market compensation data by role, location, and experience level. Compares against your current comp structure. Flags underpaid at-risk employees and generates adjustment recommendations.',hook:'Your best people know their market value. Do you?',bS:'Gut-feel compensation',bI:['Salaries set by negotiation, not data','No visibility into market rates','Underpaid employees leave silently','Comp equity issues hidden'],aS:'Data-driven comp strategy',aI:['Market data pulled by role + location','Current comp compared to benchmarks','At-risk employees flagged','Adjustment recommendations with budget impact'],time:'Hours of research → minutes',money:'Targeted retention spend',roi:'First comp review cycle',personas:['HR Director','VP of People','CFO','CEO'],conns:['HRIS','Compensation Databases','Spreadsheets','Email'],svc:'OpenClaw + Claude Cowork',price:'From $2,499',tl:'5–7 days',v:'1.1',updated:'Mar 2026',changes:['Regional cost-of-living adjustments','Equity and bonus benchmarking','Total compensation view','Pay band generator']},
+
+'signal-intelligence':{name:'Signal Intelligence Listener',cat:'peoplehr',catL:'People & HR',tag:'Hear what your team isn\'t saying — before it\'s too late.',desc:'Passively monitors Slack channels, Gmail threads, Otter AI / Read AI meeting transcripts, and CRM activity for critical signals. Surfaces three categories: coaching moments (struggling employees, skill gaps, communication issues), red flags (disengagement, conflict, compliance risks, flight risk indicators), and upsell opportunities (client expansion signals, unmet needs mentioned in calls, renewal timing). Weekly digest for managers and revenue leaders.',hook:'The signals are already in your tools. You\'re just not listening.',bS:'Signals buried in noise',bI:['Slack messages scroll past unread','Meeting context forgotten by EOD','Client upsell cues missed in calls','Employee disengagement invisible until resignation','Manager coaching reactive, not proactive','Revenue opportunities lost in conversation threads'],aS:'Signals surfaced automatically',aI:['Slack sentiment and keyword monitoring','Meeting transcripts scanned for coaching cues','Client calls analyzed for expansion signals','Flight risk indicators flagged early','Coaching recommendations pushed to managers','Upsell opportunities routed to account owners'],time:'Always-on intelligence',money:'Retained revenue + retained people',roi:'First weekly digest',personas:['VP of People','Sales Director','Manager','COO','CEO'],conns:['Slack','Gmail','Otter AI','Read AI','CRM','Calendar','Gong / Chorus'],svc:'OpenClaw + Claude Cowork',price:'From $2,999',tl:'7–10 days',v:'1.2',updated:'Mar 2026',changes:['Gong call integration','Flight risk scoring model','Client health score from signals','Manager coaching digest format']},
+
+// ===========================
+// MARKETING & GROWTH (7)
+// ===========================
+'seo-optimizer':{name:'SEO Audit & Content Optimizer',cat:'marketing',catL:'Marketing & Growth',tag:'Page 1 rankings without an agency retainer.',desc:'Crawls your site, audits technical SEO, identifies keyword gaps, and generates optimized content briefs. Tracks rankings weekly and recommends fixes prioritized by traffic impact.',hook:'You\'re paying $5K/month for an SEO agency to send you a PDF. This does more.',bS:'$5K/month agency + guessing',bI:['Technical issues found months late','Keyword strategy based on hunches','Content written without SEO data','Rankings tracked in spreadsheets'],aS:'Continuous SEO intelligence',aI:['Full site audit with prioritized fixes','Keyword gaps identified with search volume','Content briefs generated with target keywords','Ranking changes tracked and alerted weekly'],time:'Replaced agency hours',money:'$60K+/year agency savings',roi:'First audit cycle',personas:['Marketing Director','CEO / Founder','Content Manager','CMO'],conns:['Google Search Console','Google Analytics','Ahrefs / SEMrush','CMS','Slack'],svc:'OpenClaw + Claude Cowork',price:'From $2,499',tl:'5–7 days',v:'1.3',updated:'Mar 2026',changes:['AI content brief generator','Competitor keyword gap analysis','Core Web Vitals monitoring','Internal linking recommendations']},
+
+'ad-copy-generator':{name:'Ad Copy & Creative Generator',cat:'marketing',catL:'Marketing & Growth',tag:'Google, Meta, LinkedIn ads — written and A/B tested.',desc:'Generates ad copy variants for Google Search, Meta (Facebook/Instagram), and LinkedIn. A/B test headlines, descriptions, CTAs. Outputs platform-ready formats with character counts.',hook:'Your marketing team writes 3 ad variants. AI writes 30 — and tests faster.',bS:'3–5 variants per campaign',bI:['Copywriter writes ads one at a time','No systematic A/B testing','Same messaging across platforms','Creative fatigue unnoticed'],aS:'30+ variants in minutes',aI:['Platform-specific copy auto-generated','Headlines, descriptions, CTAs — all variants','Character counts validated per platform','Performance-based recommendations over time'],time:'90% faster creative',money:'Lower CPA from better copy',roi:'First campaign launch',personas:['Marketing Director','Performance Marketer','CEO / Founder','CMO'],conns:['Google Ads','Meta Ads Manager','LinkedIn Campaign Manager','Analytics'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.4',updated:'Mar 2026',changes:['LinkedIn Thought Leader Ads format','Dynamic keyword insertion','Landing page message match scoring','Creative fatigue detection']},
+
+'email-campaign-builder':{name:'Email Campaign Builder',cat:'marketing',catL:'Marketing & Growth',tag:'Sequences that sell while you sleep.',desc:'Builds complete email sequences — welcome series, nurture campaigns, re-engagement, abandoned cart. Subject lines A/B tested, send times optimized, segmentation automatic.',hook:'Your email list is your most valuable asset. You\'re barely using it.',bS:'Batch-and-blast emails',bI:['Same email to everyone','No segmentation','Sequences built manually','Open rates declining'],aS:'Intelligent sequences',aI:['Segments auto-created from behavior','Multi-step sequences auto-generated','Subject lines A/B tested','Send times optimized per recipient'],time:'Hours → minutes per campaign',money:'2–3x email revenue',roi:'First sequence launch',personas:['Marketing Director','E-Commerce Manager','CEO / Founder','CMO'],conns:['Mailchimp / Klaviyo','CRM','Shopify / WooCommerce','Analytics'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.2',updated:'Mar 2026',changes:['Abandoned cart sequence templates','Win-back campaign builder','Revenue attribution per email','Dynamic content blocks']},
+
+'landing-page-gen':{name:'Landing Page Generator',cat:'marketing',catL:'Marketing & Growth',tag:'Campaign to conversion page in 10 minutes.',desc:'Generates high-converting landing pages from a campaign brief. Headlines, body copy, social proof sections, CTAs — all optimized for conversion. Outputs clean HTML or integrates with page builders.',hook:'Your $5K ad spend sends traffic to a generic page. That\'s not marketing — that\'s waste.',bS:'Weeks to launch pages',bI:['Designer + developer required','Weeks to launch a landing page','Copy not optimized for conversion','No A/B testing on pages'],aS:'10 min per page',aI:['Brief → complete landing page','Copy optimized for conversion','Social proof sections included','A/B variants generated automatically'],time:'Weeks → minutes',money:'Higher conversion rate',roi:'First campaign landing page',personas:['Marketing Director','Performance Marketer','CEO / Founder','Growth'],conns:['Webflow / WordPress','Google Analytics','CRM','Ad Platforms'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.1',updated:'Mar 2026',changes:['Webflow export support','Heat map integration','Mobile-first optimization','Testimonial block generator']},
+
+'influencer-finder':{name:'Influencer & Partnership Finder',cat:'marketing',catL:'Marketing & Growth',tag:'Find the right voices. Skip the fake followers.',desc:'Scrapes social platforms for influencers by niche, engagement rate, audience demographics, and brand alignment. Generates outreach templates and tracks campaign ROI.',hook:'80% of influencer spend is wasted on fake engagement. This finds the real ones.',bS:'Manual influencer research',bI:['Search Instagram/TikTok manually','Fake followers indistinguishable','No engagement rate analysis','Outreach emails written one by one'],aS:'Data-driven partnerships',aI:['Influencers scored by real engagement','Audience demographics analyzed','Fake follower detection','Outreach templates auto-generated'],time:'90% faster discovery',money:'Higher influencer ROI',roi:'First partnership campaign',personas:['Marketing Director','Social Media Manager','CMO','Brand Manager'],conns:['Instagram API','TikTok','LinkedIn','Email','CRM'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.0',updated:'Mar 2026',changes:['Initial release','TikTok creator analysis','Brand safety scoring','Campaign ROI tracker']},
+
+'brand-voice':{name:'Brand Voice & Style Engine',cat:'marketing',catL:'Marketing & Growth',tag:'Every piece of content sounds like you.',desc:'Analyzes your existing content to extract brand voice, tone, vocabulary, and style patterns. Creates a living style guide that auto-checks new content for brand consistency.',hook:'Your brand voice changes depending on who wrote the email. Not anymore.',bS:'Inconsistent brand voice',bI:['Every writer sounds different','Style guide sits in a folder unread','Tone shifts across channels','New hires take months to match voice'],aS:'Locked-in brand voice',aI:['Voice profile extracted from your content','New content auto-checked for consistency','Suggestions to match brand tone','Style guide updates automatically'],time:'Eliminated brand drift',money:'Consistent brand = premium perception',roi:'First content review',personas:['Marketing Director','Content Manager','CMO','CEO / Founder'],conns:['Google Docs','CMS','Social Media','Email Marketing'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.2',updated:'Mar 2026',changes:['Multi-channel voice profiles','Competitor voice comparison','Tone adjustment slider','Content scoring dashboard']},
+
+'utm-attribution':{name:'Campaign Attribution Tracker',cat:'marketing',catL:'Marketing & Growth',tag:'Know exactly which dollar made you money.',desc:'Auto-generates UTM parameters, tracks campaign performance across channels, and attributes revenue to specific campaigns, ads, and content pieces.',hook:'You\'re spending $10K/month on marketing but can\'t tell which half is working.',bS:'No clear attribution',bI:['UTMs inconsistent or missing','Revenue can\'t be traced to campaigns','Channel performance compared in spreadsheets','Budget decisions based on gut feel'],aS:'Full attribution clarity',aI:['UTMs auto-generated and enforced','Revenue attributed to specific campaigns','Cross-channel comparison dashboard','Budget recommendations data-backed'],time:'Automated tracking',money:'Budget allocated to what works',roi:'First campaign cycle',personas:['Marketing Director','CMO','CEO / Founder','Performance Marketer'],conns:['Google Analytics','Ad Platforms','CRM','Shopify / WooCommerce'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.1',updated:'Mar 2026',changes:['Multi-touch attribution model','UTM naming convention enforcer','ROAS calculator per channel','Monthly marketing ROI report']},
+
+// ===========================
+// DATA & SCRAPING (6)
+// ===========================
+'lead-scraper':{name:'Lead Scraper & Enricher',cat:'scraping',catL:'Data & Scraping',tag:'Build targeted prospect lists while you sleep.',desc:'Scrapes LinkedIn, industry directories, Google Maps, and company databases. Enriches with email, phone, revenue, tech stack, and decision-maker data. Exports to CRM.',hook:'Your SDR spends 3 hours/day building lists. That\'s 3 hours not selling.',bS:'3+ hrs/day list building',bI:['Manual LinkedIn searching','No email or phone data','Lists outdated by the time they\'re built','SDRs doing research, not outreach'],aS:'Auto-built enriched lists',aI:['Target criteria → prospect list overnight','Email, phone, revenue enriched','Decision-makers identified by role','Pushed to CRM, ready for outreach'],time:'3+ hrs/day reclaimed per SDR',money:'More pipeline, less research',roi:'First enriched list',personas:['Sales Director','SDR Manager','CEO / Founder','Growth'],conns:['Apify','LinkedIn','Google Maps','Clearbit / Apollo','CRM'],svc:'OpenClaw + Claude Cowork',price:'From $2,499',tl:'5–7 days',v:'1.5',updated:'Mar 2026',changes:['Apollo.io integration','Tech stack detection','Intent signal scoring','CRM duplicate detection']},
+
+'price-monitor':{name:'Price & Competitor Monitor',cat:'scraping',catL:'Data & Scraping',tag:'Know when competitors change anything.',desc:'Scrapes competitor websites daily for pricing changes, new products, feature updates, job postings, and content changes. Alerts on significant shifts.',hook:'Your competitor raised prices last week. Their customers are looking for alternatives right now.',bS:'Check manually (or don\'t)',bI:['Competitor sites checked sporadically','Price changes discovered from customers','New product launches missed','No systematic monitoring'],aS:'Daily competitive intelligence',aI:['Pricing scraped and tracked daily','Product/feature changes detected','Job postings signal strategic shifts','Alerts for significant changes'],time:'Always-on monitoring',money:'Captured competitor\'s unhappy customers',roi:'First pricing alert',personas:['CEO / Founder','Sales Director','Product Manager','CMO'],conns:['Apify','Web Scrapers','Slack','Email','CRM'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.3',updated:'Mar 2026',changes:['Job posting volume tracking','Wayback Machine integration','Social media change detection','Weekly competitor digest']},
+
+'review-scraper':{name:'Review Aggregation Intelligence',cat:'scraping',catL:'Data & Scraping',tag:'Every review about you and your competitors — one feed.',desc:'Scrapes reviews from Google, Yelp, G2, Capterra, TrustPilot, and industry-specific sites. Aggregates sentiment, tracks trends, and benchmarks against competitors.',hook:'Your competitors\' 1-star reviews are your sales opportunities.',bS:'Reviews checked manually',bI:['Reviews on 6+ platforms unchecked','Competitor review sentiment unknown','No trend analysis','Opportunities in negative reviews missed'],aS:'Unified review intelligence',aI:['All platforms scraped and aggregated','Sentiment scored and trended','Competitor benchmarking included','Sales opportunities from negative reviews surfaced'],time:'Automated review monitoring',money:'Competitive advantage',roi:'First weekly digest',personas:['Marketing Director','CEO / Founder','Sales Director','Customer Success'],conns:['Apify','Google Business','Yelp','G2 / Capterra','Slack','CRM'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.2',updated:'Mar 2026',changes:['TrustPilot integration','Competitor sentiment comparison','Review response suggestions','Win/loss signal extraction']},
+
+'market-crawler':{name:'Market Research Crawler',cat:'scraping',catL:'Data & Scraping',tag:'Primary research at secondary research prices.',desc:'Scrapes industry reports, regulatory filings, news articles, and public data sources. Synthesizes into structured market research with trends, sizing, and competitive landscape.',hook:'$50K market research reports contain 80% of what you could scrape for free.',bS:'$50K research reports',bI:['Commission expensive research firms','Reports outdated by publication','Data locked in PDF format','No continuous updates'],aS:'Continuous market intelligence',aI:['Public data sources scraped continuously','Trends identified and tracked','Market sizing auto-updated','Delivered as structured, searchable data'],time:'Weeks → hours',money:'$50K+ in research savings',roi:'First research brief',personas:['CEO / Founder','Strategy','Product Manager','VP of Ops'],conns:['Apify','News APIs','SEC Filings','Industry Databases','Google Docs'],svc:'OpenClaw + Claude Cowork',price:'From $2,499',tl:'5–7 days',v:'1.1',updated:'Mar 2026',changes:['SEC filing parser','Patent monitoring','Industry conference agenda scraping','Trend velocity scoring']},
+
+'job-intel':{name:'Hiring Intelligence Scraper',cat:'scraping',catL:'Data & Scraping',tag:'Read a company\'s strategy through their job postings.',desc:'Scrapes job boards for target companies and industries. Analyzes hiring velocity, role types, salary ranges, tech stacks, and expansion signals.',hook:'A company\'s job postings tell you more than their press releases.',bS:'No hiring signal visibility',bI:['Competitor hiring unknown','Industry talent trends invisible','Salary benchmarks guessed','Expansion signals missed'],aS:'Hiring intelligence dashboard',aI:['Job postings tracked by company and role','Hiring velocity signals growth/contraction','Salary ranges benchmarked by region','Tech stack inferred from requirements'],time:'Automated intelligence',money:'Strategic hiring advantage',roi:'First intelligence report',personas:['HR Director','CEO / Founder','Sales Director','Strategy'],conns:['Apify','LinkedIn Jobs','Indeed','Glassdoor','Slack'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.0',updated:'Mar 2026',changes:['Initial release','Multi-board aggregation','Department growth tracking','Competitor org chart inference']},
+
+'web-extraction':{name:'Web Data Pipeline Builder',cat:'scraping',catL:'Data & Scraping',tag:'Any website. Any data. Your spreadsheet.',desc:'Custom web scraping pipelines for any public data source. Real estate listings, government filings, product catalogs, directory listings. Scheduled, cleaned, and delivered.',hook:'If it\'s public data on a website, you should have it in a spreadsheet.',bS:'Copy-paste from websites',bI:['Interns copy data from websites','Data entry errors everywhere','Can\'t scale past 100 records','No recurring updates'],aS:'Automated data pipelines',aI:['Any public website → structured data','Scheduled daily/weekly/monthly','Cleaned, deduplicated, formatted','Delivered to spreadsheet, database, or API'],time:'Eliminated manual scraping',money:'Data at scale',roi:'First pipeline run',personas:['Ops Manager','Analyst','CEO / Founder','Marketing Director'],conns:['Apify','Google Sheets','Airtable','CRM','Email'],svc:'OpenClaw + Claude Cowork',price:'From $2,499',tl:'5–7 days',v:'1.2',updated:'Mar 2026',changes:['Anti-detection improvements','PDF table extraction','Image OCR for data','API endpoint output option']},
+
+// ===========================
+// S&OP & SUPPLY CHAIN (4)
+// ===========================
+'demand-planning':{name:'Demand Planning Engine',cat:'sop',catL:'S&OP',tag:'Predict demand. Plan supply. Stop guessing.',desc:'Combines historical sales, seasonality, promotions, and external signals to forecast demand by SKU, channel, and region. Feeds directly into procurement and production planning.',hook:'You\'re either overproducing or underproducing. Both cost you money.',bS:'Gut-feel forecasting',bI:['Forecasts based on last year + hope','Seasonal demand catches you off guard','Promotions impact not modeled','Forecast accuracy below 60%'],aS:'AI-driven demand forecast',aI:['Demand predicted by SKU, channel, region','Seasonality and trends auto-modeled','Promotion impact quantified','Forecast accuracy above 85%'],time:'Automated forecasting',money:'30% less overstock/stockout',roi:'First planning cycle',personas:['VP of Ops','Supply Chain Manager','COO','CFO'],conns:['ERP','POS / Sales Data','CRM','Spreadsheets','Supplier Portals'],svc:'OpenClaw + Claude Cowork',price:'From $2,499',tl:'5–7 days',v:'1.3',updated:'Mar 2026',changes:['External signal integration (weather, events)','Multi-channel demand split','New product launch forecasting','Consensus planning workflow']},
+
+'sop-report':{name:'S&OP Report Generator',cat:'sop',catL:'S&OP',tag:'Monthly S&OP meetings with zero prep work.',desc:'Pulls data from sales, operations, finance, and supply chain systems. Generates the complete S&OP report: demand vs. supply, inventory positions, gap analysis, and executive recommendations.',hook:'Your S&OP meeting prep takes 2 weeks of analyst time. This takes 30 minutes.',bS:'2 weeks of analyst prep',bI:['Data pulled from 6 systems manually','Excel models break monthly','Reports inconsistent across teams','Meeting prep is the meeting'],aS:'Auto-generated S&OP package',aI:['All systems pulled automatically','Demand vs. supply visualized','Gap analysis with recommendations','Executive summary ready for meeting'],time:'2 weeks → 30 minutes',money:'Better planning decisions',roi:'First S&OP cycle',personas:['VP of Ops','COO','Supply Chain Manager','CFO','CEO'],conns:['ERP','CRM','Inventory','Finance System','Google Docs'],svc:'OpenClaw + Claude Cowork',price:'From $2,499',tl:'5–7 days',v:'1.1',updated:'Mar 2026',changes:['Financial overlay integration','Scenario planning tool','Rolling 12-month horizon','Exception-based executive summary']},
+
+'supply-risk':{name:'Supply Chain Risk Monitor',cat:'sop',catL:'S&OP',tag:'See disruptions before they hit your P&L.',desc:'Monitors supplier health, geopolitical risks, weather disruptions, port congestion, and commodity prices. Scores risk by supplier and generates contingency recommendations.',hook:'The next supply chain disruption is coming. Will you see it first — or feel it first?',bS:'Reactive to disruptions',bI:['Supplier issues discovered at delivery','No visibility into upstream risks','Single-source dependencies unknown','Contingency plans don\'t exist'],aS:'Proactive risk management',aI:['Supplier health scored continuously','Geopolitical and weather risks tracked','Single-source risks flagged','Contingency plans auto-generated'],time:'Early warning system',money:'Avoided disruption costs',roi:'First avoided disruption',personas:['Supply Chain Manager','VP of Ops','COO','Procurement'],conns:['Supplier Databases','News Feeds','Weather APIs','Shipping APIs','ERP'],svc:'OpenClaw + Claude Cowork',price:'From $2,499',tl:'5–7 days',v:'1.0',updated:'Mar 2026',changes:['Initial release','Port congestion monitoring','Commodity price tracking','Alternate supplier recommendation']},
+
+'production-scheduler':{name:'Production Schedule Optimizer',cat:'sop',catL:'S&OP',tag:'Maximum output. Minimum changeovers.',desc:'Optimizes production schedules based on demand forecasts, machine capacity, changeover times, and material availability. Minimizes downtime and maximizes throughput.',hook:'Every changeover costs you production time. Every idle machine costs you money.',bS:'Manual scheduling',bI:['Schedules built in spreadsheets','Changeover times not optimized','Machine utilization below 70%','Rush orders destroy the plan'],aS:'AI-optimized production',aI:['Schedules optimized for throughput','Changeovers minimized automatically','Machine utilization above 85%','Rush orders absorbed with minimal disruption'],time:'15%+ throughput increase',money:'Higher capacity utilization',roi:'First optimized week',personas:['Production Manager','VP of Ops','COO','Plant Manager'],conns:['ERP','MES','Inventory','Scheduling','Spreadsheets'],svc:'OpenClaw + Claude Cowork',price:'From $2,499',tl:'5–7 days',v:'1.1',updated:'Mar 2026',changes:['Multi-line scheduling','Preventive maintenance windows','Material constraint integration','What-if scenario planner']},
+
+// ===========================
+// FINANCE (5)
+// ===========================
+'cash-flow':{name:'Cash Flow Forecaster',cat:'finance',catL:'Finance',tag:'See your cash position 90 days out.',desc:'Models cash inflows and outflows from AR, AP, payroll, recurring expenses, and projected revenue. 13-week rolling forecast with scenario modeling.',hook:'60% of business failures are profitable companies that ran out of cash.',bS:'Cash surprises',bI:['Cash checked by looking at bank balance','Payroll vs. receivables timing unknown','No forward visibility','Decisions made without cash context'],aS:'90-day rolling forecast',aI:['AR + AP + payroll modeled automatically','13-week cash flow projection','Scenario modeling: best/worst/expected','Alert when cash runway gets tight'],time:'Automated forecasting',money:'Avoided cash crunches',roi:'First forecast',personas:['CFO','Controller','CEO / Founder','COO'],conns:['QuickBooks / Xero','Bank Feeds','Payroll System','CRM','Spreadsheets'],svc:'OpenClaw + Claude Cowork',price:'From $2,499',tl:'5–7 days',v:'1.4',updated:'Mar 2026',changes:['Multi-entity consolidation','Credit line draw modeling','Seasonal adjustment learning','Board-ready cash report']},
+
+'budget-analyzer':{name:'Budget vs. Actual Analyzer',cat:'finance',catL:'Finance',tag:'Variances caught weekly, not quarterly.',desc:'Pulls actuals from accounting, compares to budget, and generates variance reports with explanations. Flags overspend before it compounds. Weekly alerts to department heads.',hook:'A 10% budget variance caught in week 2 is a conversation. Caught in month 3 is a crisis.',bS:'Quarterly variance reviews',bI:['Budget vs. actual checked at quarter-end','Variances discovered too late','Department heads blindsided','No root cause analysis'],aS:'Weekly variance intelligence',aI:['Actuals pulled and compared weekly','Variances flagged at threshold','Root cause analysis auto-generated','Department heads alerted proactively'],time:'Continuous vs. quarterly',money:'Earlier intervention',roi:'First variance catch',personas:['CFO','Controller','Department Heads','CEO'],conns:['QuickBooks / Xero','Budget Tool','Email','Slack','Spreadsheets'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.2',updated:'Mar 2026',changes:['Department-level drill-down','Trend-based overspend prediction','Reforecast recommendations','Board presentation export']},
+
+'ar-automator':{name:'Accounts Receivable Automator',cat:'finance',catL:'Finance',tag:'Get paid faster without chasing.',desc:'Automates invoice delivery, payment reminders, overdue escalation, and collections workflows. Tracks DSO, aging, and customer payment patterns.',hook:'Your AR team spends 40% of their time chasing payments. Automate the chase.',bS:'60+ day DSO',bI:['Invoices sent manually','Reminders forgotten or inconsistent','Overdue accounts pile up','Collections conversations dreaded'],aS:'30-day DSO',aI:['Invoices auto-sent on delivery','Smart reminders at 3/7/14/30 days','Escalation path auto-triggered','Customer payment patterns learned'],time:'80% less manual chasing',money:'30–50% DSO reduction',roi:'First billing cycle',personas:['CFO','Controller','Bookkeeper','Office Manager','AR Specialist'],conns:['QuickBooks / Xero','Email','SMS','Payment Gateway','CRM'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.3',updated:'Mar 2026',changes:['Payment portal link in reminders','Autopay enrollment nudges','Customer credit scoring','Collections agency handoff workflow']},
+
+'rev-recognition':{name:'Revenue Recognition Engine',cat:'finance',catL:'Finance',tag:'ASC 606 compliant without the headaches.',desc:'Automates revenue recognition for subscription, milestone, and project-based businesses. Ensures ASC 606 / IFRS 15 compliance. Generates journal entries and audit trails.',hook:'Revenue recognition errors don\'t just cause restatements — they cause lawsuits.',bS:'Manual rev rec in spreadsheets',bI:['Revenue recognized by gut feel','ASC 606 rules applied inconsistently','Audit trail nonexistent','Restatement risk high'],aS:'Automated compliance',aI:['Contracts analyzed for performance obligations','Revenue allocated and recognized automatically','Journal entries generated','Full audit trail maintained'],time:'Eliminated manual rev rec',money:'Audit-proof compliance',roi:'First reporting period',personas:['CFO','Controller','Revenue Accountant','Auditor'],conns:['CRM / Contract Management','QuickBooks / Xero','ERP','Spreadsheets'],svc:'OpenClaw + Claude Cowork',price:'From $2,499',tl:'5–7 days',v:'1.1',updated:'Mar 2026',changes:['Multi-element arrangement support','Contract modification handling','Disclosure report generator','ASC 606 checklist automation']},
+
+'financial-model':{name:'Financial Model Builder',cat:'finance',catL:'Finance',tag:'Board-ready models in hours, not weeks.',desc:'Generates 3-statement financial models, scenario analyses, and investor-ready projections from your actuals and assumptions. Templates for fundraising, M&A, and strategic planning.',hook:'Your CFO shouldn\'t spend 2 weeks building a model that changes the next day.',bS:'2+ weeks per model',bI:['Models built from scratch in Excel','Version control chaos','Assumptions buried in formulas','Updates break the whole model'],aS:'Hours per model',aI:['3-statement model auto-generated','Assumptions clearly separated','Scenario toggle: bull/base/bear','Investor-ready formatting included'],time:'90% faster',money:'Better strategic decisions',roi:'First model built',personas:['CFO','CEO / Founder','VP of Finance','Investment Analyst'],conns:['QuickBooks / Xero','Bank Feeds','CRM','Spreadsheets','Google Docs'],svc:'OpenClaw + Claude Cowork',price:'From $2,499',tl:'5–7 days',v:'1.2',updated:'Mar 2026',changes:['SaaS metrics module','M&A synergy model','Cap table integration','Monthly actuals auto-import']},
+
+// ===========================
+// HEALTHCARE — EXPANDED (3 new)
+// ===========================
+'referral-engine':{name:'Referral Management Engine',cat:'healthcare',catL:'Healthcare',tag:'Zero lost referrals. Zero phone tag.',desc:'Tracks referrals from receipt to appointment completion. Auto-sends referral letters, confirms receipt by specialist, follows up with patients, and closes the loop with referring provider.',hook:'40% of referrals never result in a visit. That\'s lost revenue and worse outcomes.',bS:'40% referral leakage',bI:['Referrals faxed and forgotten','No tracking on receipt or scheduling','Patients don\'t follow through','Referring provider never hears back'],aS:'Closed-loop referral tracking',aI:['Referral letters auto-generated and sent','Receipt confirmed by specialist office','Patient follow-up automated','Referring provider updated on outcome'],time:'Eliminated referral leakage',money:'40% more referral conversions',roi:'First month',personas:['Practice Owner','Office Manager','Referral Coordinator','Physician'],conns:['EHR/EMR','Fax','Email/SMS','Patient Portal','Scheduling'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',note:'Designed with HIPAA considerations.',v:'1.1',updated:'Mar 2026',changes:['E-referral portal','Patient consent tracking','Specialist availability check','Referral analytics dashboard']},
+
+'patient-followup':{name:'Patient Follow-Up Automator',cat:'healthcare',catL:'Healthcare',tag:'Every patient followed up. Every time.',desc:'Automates post-visit follow-ups: medication adherence checks, wound care instructions, lab result notifications, satisfaction surveys, and re-appointment reminders.',hook:'Post-visit follow-up is where outcomes are won or lost. Most practices skip it.',bS:'Follow-up inconsistent or skipped',bI:['Post-visit calls forgotten','Medication adherence unchecked','Lab results delivered late','Re-appointments not scheduled'],aS:'Automated follow-up sequences',aI:['Post-visit check-ins auto-sent','Medication reminders scheduled','Lab results delivered with explanation','Re-appointment reminders auto-triggered'],time:'Eliminated manual follow-up',money:'Higher patient satisfaction + retention',roi:'First month',personas:['Practice Owner','Office Manager','Nurse Manager','Physician'],conns:['EHR/EMR','SMS/Email','Patient Portal','Lab Systems'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',note:'HIPAA considerations apply.',v:'1.0',updated:'Mar 2026',changes:['Initial release','Medication interaction alerts','Patient education content library','Chronic care management sequences']},
+
+'medical-coding':{name:'Medical Coding Optimizer',cat:'healthcare',catL:'Healthcare',tag:'Capture every billable dollar. Miss nothing.',desc:'Reviews visit documentation against coding guidelines to identify missed codes, upcoding risks, and documentation gaps. Maximizes legitimate reimbursement while maintaining compliance.',hook:'The average practice under-codes by 20%. That\'s pure lost revenue.',bS:'20% under-coding',bI:['Coders work from memory','Missed codes = lost revenue','Upcoding risks uncaught','Documentation gaps discovered at audit'],aS:'Optimized coding',aI:['Every visit reviewed against guidelines','Missed codes surfaced with documentation support','Upcoding risks flagged before submission','Documentation gap alerts to providers'],time:'Eliminated coding review backlog',money:'15–25% revenue increase',roi:'First billing cycle',personas:['Billing Staff','Office Manager','Practice Owner','Medical Coder'],conns:['EHR/EMR','Billing System','Coding Databases','Email'],svc:'OpenClaw + Claude Cowork',price:'From $2,499',tl:'5–7 days',note:'Compliance considerations apply.',v:'1.2',updated:'Mar 2026',changes:['2026 CPT code updates','Specialty-specific code suggestions','Audit risk scoring','Denial prevention recommendations']},
+
+// ===========================
+// FIELD / ON-SITE — EXPANDED (4 new: 2 construction, 2 home services)
+// ===========================
+'fleet-tracker':{name:'Fleet & Vehicle Tracker',cat:'construction',catL:'Construction',tag:'Every truck, every tool, every hour — accounted for.',desc:'GPS tracking for fleet vehicles with maintenance scheduling, fuel consumption monitoring, driver behavior scoring, and utilization reporting. Prevents unauthorized use and missed maintenance.',hook:'A blown engine from missed maintenance costs $15K. Preventive checks cost nothing.',bS:'No fleet visibility',bI:['Vehicle locations unknown','Maintenance tracked by mileage sticker','Fuel costs unexplained','Unauthorized after-hours use'],aS:'Full fleet intelligence',aI:['Real-time vehicle locations','Maintenance auto-scheduled by usage','Fuel consumption tracked per vehicle','Usage alerts for after-hours or off-route'],time:'Prevented breakdowns',money:'20% fuel savings',roi:'First month',personas:['Fleet Manager','Owner','Ops Manager','Dispatcher'],conns:['GPS/Telematics','Fuel Cards','Maintenance System','Spreadsheets'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.2',updated:'Mar 2026',changes:['Maintenance prediction model','Fuel theft detection','Driver scorecard','DOT compliance reporting']},
+
+'equipment-logger':{name:'Equipment Inspection Logger',cat:'construction',catL:'Construction',tag:'Inspect. Log. Prove. All from your phone.',desc:'Digital inspection checklists for heavy equipment — cranes, excavators, lifts. Photo documentation, deficiency flags, operator sign-off. Compliance-ready inspection history.',hook:'OSHA requires equipment inspections. Your paper logs won\'t survive an audit.',bS:'Paper inspection logs',bI:['Inspections on paper (or skipped)','Photos not attached to records','Deficiencies found and forgotten','Audit trail is a filing cabinet'],aS:'Digital inspection system',aI:['Checklists on phone/tablet','Photos attached to each item','Deficiencies auto-assigned for repair','Full audit trail, cloud-stored'],time:'Faster inspections',money:'Avoided equipment failures + fines',roi:'First inspection cycle',personas:['Safety Manager','Foreman','Superintendent','Equipment Manager'],conns:['Camera','Equipment Database','Email Alerts','Cloud Storage'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.0',updated:'Mar 2026',changes:['Initial release','QR code equipment tagging','Deficiency photo annotation','OSHA inspection template library']},
+
+'weather-delay':{name:'Weather Delay Manager',cat:'construction',catL:'Construction',tag:'Document delays. Protect your timeline.',desc:'Monitors hyperlocal weather forecasts for active jobsites. Auto-generates weather delay documentation with timestamps, conditions, and impact on schedule. Feeds into project timeline adjustments.',hook:'Weather delays without documentation become your fault in a contract dispute.',bS:'Weather checked manually',bI:['Foreman checks phone for weather','Delays documented after the fact','No link between weather and schedule','Disputes over delay responsibility'],aS:'Automated weather intelligence',aI:['Hyperlocal forecasts per jobsite','Delay documentation auto-generated','Schedule impact calculated','Contractual notice auto-sent'],time:'Automated documentation',money:'Protected schedule claims',roi:'First weather delay',personas:['Project Manager','Superintendent','Owner','Scheduler'],conns:['Weather APIs','Scheduling / P6','Email','Project Management'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.1',updated:'Mar 2026',changes:['7-day look-ahead alerts','Trade-specific impact assessment','Force majeure documentation','Schedule recovery recommendations']},
+
+'field-photo-doc':{name:'Field Photo Documentation',cat:'homeservices',catL:'Home Services',tag:'Before. During. After. Indisputable.',desc:'Timestamped, geo-tagged photo documentation for every job. Organizes by customer, date, and work phase. Auto-generates completion reports with before/after comparisons.',hook:'Customer disputes about work quality disappear when you have timestamped photos.',bS:'Photos in camera roll',bI:['Photos mixed with personal pictures','No timestamps or location proof','Before photos forgotten','Customer disputes are word vs. word'],aS:'Organized proof of work',aI:['Photos auto-tagged by job and phase','Timestamp and GPS embedded','Before/during/after organized','Completion report auto-generated'],time:'Eliminated disputes',money:'Protected reputation',roi:'First job completion',personas:['Technician','Owner','Project Manager','Office Manager'],conns:['Camera','CRM','Cloud Storage','Email'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.0',updated:'Mar 2026',changes:['Initial release','Customer-facing photo portal','Insurance claim photo package','Quality scoring from photos']},
+
+'maintenance-agreement':{name:'Maintenance Agreement Manager',cat:'homeservices',catL:'Home Services',tag:'Recurring revenue on autopilot.',desc:'Manages service agreements — auto-schedules seasonal visits, sends reminders, tracks agreement renewal dates, and upsells during visits. Turns one-time jobs into recurring relationships.',hook:'Service agreements are the #1 source of recurring revenue in home services. Are you maximizing them?',bS:'Agreements tracked in filing cabinet',bI:['Agreement renewals missed','Seasonal visits not scheduled','No upsell during maintenance','Revenue inconsistent month to month'],aS:'Automated agreement engine',aI:['Renewals tracked and auto-reminded','Visits auto-scheduled by season','Upsell checklist for every visit','Recurring revenue dashboard'],time:'Automated scheduling',money:'30% more recurring revenue',roi:'First renewal cycle',personas:['Owner','Office Manager','Service Manager','Technician'],conns:['CRM','Scheduling','Email/SMS','Payment','Accounting'],svc:'OpenClaw + Claude Cowork',price:'From $1,999',tl:'3–5 days',v:'1.1',updated:'Mar 2026',changes:['Multi-year agreement pricing','Automatic price escalation','Referral bonus tracking','Agreement profitability report']}
+
+};
+
+// ===========================
+// MVP TOP 20 RANKING (ordered)
+// ===========================
+const MVP=[
+  'email-triage',
+  'pip-generator',
+  'contract-generator',
+  'meeting-action',
+  'daily-briefing',
+  'kpi-dashboard',
+  'knowledge-base',
+  'signal-intelligence',
+  'lead-scraper',
+  'cash-flow',
+  'proposal-builder',
+  'performance-dashboard',
+  'seo-optimizer',
+  'feedback-analyzer',
+  'competitive-intel',
+  'demand-planning',
+  'client-onboarding',
+  'timesheet-reconciler',
+  'invoice-processor',
+  'one-on-one-engine'
+];
+function mvpRank(id){ const i=MVP.indexOf(id); return i>=0?i+1:0; }
+
+// ===========================
+// CATEGORY SORT ORDER (value/popularity)
+// ===========================
+const CAT_ORDER=['musthave','peoplehr','universal','marketing','scraping','finance','sop','professional','construction','healthcare','logistics','realestate','retail','hospitality','homeservices','insurance','education'];
+function catScore(cat){ const i=CAT_ORDER.indexOf(cat); return i>=0?i:99; }
+
+// ===========================
+// ROLE → PERSONA KEYWORD MAP
+// ===========================
+const ROLE_MAP={
+  'ceo':['CEO','Founder','Owner','Practice Owner','CEO / Founder','Agency Owner','Restaurant Owner','Firm Owner','Plant Manager'],
+  'cos':['COO','Chief of Staff','Ops Manager','Ops Director','VP of Ops','Operations'],
+  'transform':['CEO','Founder','COO','VP of People','CTO','Director','CHRO','Ops Director','Ops Manager','Training Director','VP of Ops','VP','CMO','Supply Chain Manager','Strategy'],
+  'hr':['HR Director','VP of People','CHRO','HR','HR Business Partner','Recruiter','Hiring Manager','Retention Specialist','People'],
+  'cfo':['CFO','Controller','Bookkeeper','Finance','Billing','Billing Staff','CPA','Tax Preparer','Accounting','Revenue Accountant','Auditor','VP of Finance','Investment Analyst','AR Specialist'],
+  'legal':['Legal','Compliance Officer','Managing Partner','Paralegal','Associate','Underwriter','Adjuster','Claims Manager'],
+  'sales':['Sales','Account Executive','Account Manager','Sales Director','Customer Success','Broker','Agent','Customer Service','Revenue','SDR Manager','Growth'],
+  'marketing':['Marketing','Marketing Manager','Marketing Director','Social Media','Content','Merchandiser','E-Commerce Manager','E-Commerce Director','Admissions Director','CMO','Content Manager','Brand Manager','Performance Marketer','Social Media Manager'],
+  'ops':['PM','Project Manager','Ops Manager','Dispatcher','Warehouse Manager','Fleet Manager','Fulfillment Lead','Logistics Coordinator','Office Manager','Estimator','Superintendent','Inventory Manager','Buyer','Purchasing','Production Manager','Procurement','Supply Chain Manager','Scheduler','Service Manager','Equipment Manager'],
+  'clinical':['Physician','Practice Owner','Nurse Manager','Office Manager','Billing Staff','Compliance Officer','Medical Coder','Referral Coordinator'],
+  'field':['Foreman','Superintendent','Technician','Inspector','Safety Manager','Dispatcher','Property Manager','Landlord','Host/Hostess','Chef','GM','Teacher','Counselor','Principal','Fleet Manager','Equipment Manager']
+};
+
+function matchesRole(personas,role){
+  if(role==='all') return true;
+  const keywords=ROLE_MAP[role]||[];
+  return personas.some(p=>keywords.some(k=>p.toLowerCase().includes(k.toLowerCase())));
+}
+
+// RENDER — sorted by value: MVP first, then by category priority
+function render(){
+  const g=document.getElementById('grid');
+  g.innerHTML='';
+  const keys=Object.keys(D);
+  // Sort: MVP first by rank, then by category order
+  keys.sort((a,b)=>{
+    const ra=mvpRank(a),rb=mvpRank(b);
+    if(ra&&rb) return ra-rb;
+    if(ra) return -1;
+    if(rb) return 1;
+    return catScore(D[a].cat)-catScore(D[b].cat);
+  });
+  keys.forEach(id=>{
+    const s=D[id];
+    const rank=mvpRank(id);
+    const mvpHtml=rank?`<div class="card-mvp"><span class="card-mvp-rank">${rank}</span>MVP Top 20</div>`:'';
+    const dots=s.conns.map(()=>'<span class="card-conn-dot"></span>').join('');
+    const connBar=s.conns.length>=3?`<div class="card-conns"><div class="card-conn-dots">${dots}</div><div class="card-conn-label"><span>${s.conns.length}</span> sources · clean data</div></div>`:'';
+    const curatedTag=rank?'<div class="curated-badge"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 1l2.1 4.3L15 6l-3.5 3.4.8 4.8L8 12l-4.3 2.2.8-4.8L1 6l4.9-.7z" fill="var(--accent)"/></svg>Curated</div>':'';
+    g.innerHTML+=`<div class="skill-card" data-id="${id}" data-cat="${s.cat}" data-search="${(s.name+' '+s.catL+' '+s.desc+' '+s.tag+' '+s.personas.join(' ')+' '+s.conns.join(' ')).toLowerCase()}" onclick="openModal('${id}')">
+      <span class="card-arrow">→</span>
+      ${mvpHtml}
+      ${curatedTag}
+      <div class="card-label">${s.catL}</div>
+      <div class="card-name">${s.name}</div>
+      <div class="card-desc">${s.tag}</div>
+      <div class="card-ba">
+        <div class="ba-col before"><div class="ba-head">Before</div><div class="ba-num">${s.bS}</div></div>
+        <div class="ba-col after"><div class="ba-head">After</div><div class="ba-num">${s.aS}</div></div>
+      </div>
+      <div class="card-meta">
+        <div class="card-services">${s.svc} · ${s.price}</div>
+        <div class="card-version">v${s.v} · ${s.updated}</div>
+      </div>
+      ${connBar}
+    </div>`;
+  });
+  if(keys.length%2!==0){
+    const last=g.lastElementChild;
+    if(last) last.classList.add('full-width');
+  }
+}
+render();
+
+// DUAL FILTER: category + role + search
+let cf='all';
+let rf='all';
+
+function setFilter(f,el){
+  cf=f;
+  document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  filterSkills();
+}
+function setRole(r,el){
+  rf=r;
+  document.querySelectorAll('.rtab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  filterSkills();
+}
+function filterSkills(){
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  let vis=0;
+  document.querySelectorAll('.skill-card').forEach(c=>{
+    const id=c.dataset.id;
+    const s=D[id];
+    const catOk=(cf==='all'||c.dataset.cat===cf);
+    const roleOk=matchesRole(s.personas,rf);
+    const searchOk=(!q||c.dataset.search.includes(q));
+    const ok=catOk&&roleOk&&searchOk;
+    c.style.display=ok?'':'none';
+    if(ok)vis++;
+  });
+  let e=document.getElementById('emptyState');
+  if(!vis){
+    if(!e){e=document.createElement('div');e.id='emptyState';e.className='empty-state';e.innerHTML='<h3>No skills found.</h3><p>Try a different combination of filters.</p>';document.getElementById('grid').appendChild(e);}
+    e.style.display='';
+  }else if(e){e.style.display='none';}
+}
+
+// MODAL — with version + changelog
+function openModal(id){
+  const s=D[id];if(!s)return;
+  const bi=s.bI.map(i=>`<div class="m-ba-item">${i}</div>`).join('');
+  const ai=s.aI.map(i=>`<div class="m-ba-item">${i}</div>`).join('');
+  const cn=s.conns.map(c=>`<span class="conn-tag">${c}</span>`).join('');
+  const ps=s.personas.map(p=>`<span class="persona-tag">${p}</span>`).join('');
+  const nt=s.note?`<div class="m-note">${s.note}</div>`:'';
+  const cl=s.changes&&s.changes.length?`<div class="m-changelog"><div class="m-changelog-head">Recent Updates</div><div class="m-changelog-list">${s.changes.map(c=>`<div class="m-changelog-item">${c}</div>`).join('')}</div></div>`:'';
+  const rank=mvpRank(id);
+  const mvpModal=rank?`<div class="m-mvp-badge">★ MVP Top 20 — #${rank}</div>`:'';
+  document.getElementById('modal').innerHTML=`
+    <div class="m-head">
+      <button class="m-close" onclick="closeModal()">✕</button>
+      ${mvpModal}
+      <div class="m-label">${s.catL}</div>
+      <div class="m-name">${s.name}</div>
+      <div class="m-version-row">
+        <span class="m-ver-badge">v${s.v}</span>
+        <span class="m-ver-date">Updated ${s.updated}</span>
+      </div>
+      <div class="m-tagline">${s.tag}</div>
+    </div>
+    <div class="m-body">
+      <div class="m-ba">
+        <div class="m-ba-col before">
+          <div class="m-ba-head">Before</div>
+          <div class="m-ba-stat">${s.bS}</div>
+          ${bi}
+        </div>
+        <div class="m-ba-col after">
+          <div class="m-ba-head">After</div>
+          <div class="m-ba-stat">${s.aS}</div>
+          ${ai}
+        </div>
+      </div>
+      <div class="m-sources-callout">
+        <div class="m-sources-head">Connects ${s.conns.length} scattered systems</div>
+        <div class="m-sources-desc">Most businesses have data trapped across disconnected tools. This Skill pulls from all of them, normalizes dirty data on ingest, and delivers clean, actionable output — no manual cleanup required.</div>
+        <div class="conn-row">${cn}</div>
+      </div>
+      <div class="m-details">
+        <div class="m-detail"><div class="md-label">Time Saved</div><div class="md-big">${s.time}</div></div>
+        <div class="m-detail"><div class="md-label">Money Saved</div><div class="md-big">${s.money}</div></div>
+        <div class="m-detail"><div class="md-label">ROI Timeline</div><div class="md-val">${s.roi}</div></div>
+        <div class="m-detail"><div class="md-label">Delivery</div><div class="md-val">${s.svc} · ${s.price} · ${s.tl}</div></div>
+        <div class="m-detail full"><div class="md-label">What It Does</div><div class="md-val">${s.desc}</div></div>
+        <div class="m-detail full"><div class="md-label">Built For</div><div class="persona-row">${ps}</div></div>
+      </div>
+      ${cl}
+      ${nt}
+      <div class="m-cta">
+        <button class="m-btn primary" onclick="window.open('https://singularagency.co','_blank')">Book a Strategy Call</button>
+        <button class="m-btn secondary" onclick="closeModal()">Keep Browsing</button>
+      </div>
+    </div>`;
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+</script>
+</body>
+</html>
