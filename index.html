@@ -1088,6 +1088,159 @@ body {
   .main-tab { padding: 0 20px; font-size: 14px; }
   .main-tab svg { width: 16px; height: 16px; }
 }
+
+/* ===== AGENTS GRID ===== */
+.agent-summary-strip {
+  padding: 40px 24px;
+  max-width: 1120px;
+  margin: 0 auto;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.agent-summary-strip h2 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+  color: var(--white);
+}
+.agent-summary-strip p {
+  font-size: 14px;
+  color: var(--text2);
+  margin-bottom: 4px;
+}
+.agent-summary-tagline {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+.agent-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 40px 24px 80px;
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.agent-card {
+  background: var(--bg);
+  padding: 40px;
+  cursor: pointer;
+  transition: background 0.3s;
+  position: relative;
+}
+.agent-card:hover {
+  background: var(--surface);
+}
+
+.agent-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(232, 93, 58, 0.1);
+  border: 1px solid rgba(232, 93, 58, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: var(--accent);
+}
+.agent-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  fill: none;
+}
+
+.agent-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.agent-desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.55;
+  margin-bottom: 18px;
+  max-width: 360px;
+}
+
+.agent-skill-count {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(232, 93, 58, 0.1);
+  padding: 4px 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.agent-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.agent-skill-tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 6px;
+  background: var(--surface2);
+  color: var(--text2);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.agent-skill-tag:hover {
+  background: var(--accent);
+  color: var(--white);
+}
+
+.agent-arrow {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  font-size: 20px;
+  color: var(--text3);
+  transition: color 0.2s, transform 0.2s;
+}
+.agent-card:hover .agent-arrow {
+  color: var(--accent);
+  transform: translateX(3px);
+}
+
+@media (max-width: 700px) {
+  .agent-grid {
+    grid-template-columns: 1fr;
+    margin: 40px 24px 80px;
+  }
+  .agent-card {
+    padding: 28px;
+  }
+  .agent-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .agent-title {
+    font-size: 18px;
+  }
+  .agent-arrow {
+    top: 28px;
+    right: 28px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1142,8 +1295,12 @@ body {
       <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
       Skill Library
       <span style="font-size:11px;color:var(--accent);font-weight:700;margin-left:2px">101</span>
+    <button class="main-tab" onclick="showPanel('agents',this)">
+      <svg viewBox="0 0 24 24"><circle cx="6" cy="7" r="2"/><path d="M2 11c0-2 2-3 4-3s4 1 4 3v3H2z"/><circle cx="18" cy="7" r="2"/><path d="M14 11c0-2 2-3 4-3s4 1 4 3v3h-8z"/></svg>
+      AI Agents
+      <span style="font-size:11px;color:var(--accent);font-weight:700;margin-left:2px">10</span>
     </button>
-  </div>
+    </div>
 </div>
 
 <!-- ============ PANEL: HOW IT WORKS ============ -->
@@ -1329,6 +1486,20 @@ body {
 </div>
 
 </div><!-- end panel-library -->
+
+<!-- ============ PANEL: AI AGENTS ============ -->
+<div class="section-panel" id="panel-agents">
+
+<div class="agent-summary-strip">
+  <h2>Meet Your AI Team</h2>
+  <p><strong>10 AI Agents</strong> covering <strong>101 Skills</strong></p>
+  <div class="agent-summary-tagline">Hire specialists. Scale instantly. Every role covered.</div>
+</div>
+
+<div class="agent-grid" id="agentsGrid"></div>
+
+</div><!-- end panel-agents -->
+
 
 <!-- BOTTOM CTA -->
 <div class="bottom-cta">
@@ -1665,6 +1836,65 @@ const ROLE_MAP={
   'clinical':['Physician','Practice Owner','Nurse Manager','Office Manager','Billing Staff','Compliance Officer','Medical Coder','Referral Coordinator'],
   'field':['Foreman','Superintendent','Technician','Inspector','Safety Manager','Dispatcher','Property Manager','Landlord','Host/Hostess','Chef','GM','Teacher','Counselor','Principal','Fleet Manager','Equipment Manager']
 };
+
+
+// AI Agents data
+const AGENTS = {"chief-of-staff": {"title": "AI Chief of Staff", "icon": "target", "desc": "Your right hand. Manages your day, your inbox, your meetings, and your priorities.", "skills": ["email-triage", "daily-briefing", "meeting-action", "knowledge-base", "social-scheduler", "competitive-intel", "feedback-analyzer", "kpi-dashboard", "client-onboarding", "dispatch-optimizer", "signal-intelligence", "utm-attribution"]}, "cfo": {"title": "AI CFO", "icon": "chart", "desc": "Watches every dollar. Closes books faster. Recovers revenue you didn't know you were losing.", "skills": ["expense-report", "invoice-processor", "monthly-close", "timesheet-reconciler", "inventory-forecast", "budget-analyzer", "cash-flow", "financial-model", "rev-recognition", "ar-automator", "tax-prep"]}, "sales-director": {"title": "AI Sales Director", "icon": "handshake", "desc": "Proposes faster, qualifies smarter, closes bigger deals.", "skills": ["proposal-builder", "service-quote", "bid-estimation", "lead-scraper", "client-intake", "job-intel", "price-monitor", "customer-segments"]}, "ops-manager": {"title": "AI Operations Manager", "icon": "gears", "desc": "Optimizes every route, forecasts every supply, eliminates every delay.", "skills": ["route-optimization", "warehouse-pick", "material-procurement", "shipment-tracking", "production-scheduler", "reorder-predictor", "demand-planning", "supply-risk", "sop-report", "equipment-logger", "fleet-tracker", "reservation-optimizer", "weather-delay", "medical-inventory", "returns-processor", "tech-dispatch"]}, "hr-director": {"title": "AI HR Director", "icon": "people", "desc": "Hires faster, develops better, retains longer.", "skills": ["hiring-pipeline", "hr-handbook", "hipaa-training", "employee-recognition", "one-on-one-engine", "performance-dashboard", "pip-generator", "exit-interview", "comp-benchmarker", "team-capacity", "enrollment-funnel"]}, "marketing-director": {"title": "AI Marketing Director", "icon": "megaphone", "desc": "Generates content at scale. Amplifies every message. Grows every audience.", "skills": ["email-campaign-builder", "landing-page-gen", "brand-voice", "seo-optimizer", "influencer-finder", "ad-copy-generator", "listing-engine", "seasonal-marketing", "course-content", "product-descriptions"]}, "legal-counsel": {"title": "AI Legal Counsel", "icon": "scales", "desc": "Generates contracts. Ensures compliance. Protects your business.", "skills": ["contract-generator", "engagement-letter", "lease-generator", "compliance-audit", "case-research", "sub-contract"]}, "client-success": {"title": "AI Client Success Manager", "icon": "handshake", "desc": "Responds instantly. Solves quickly. Builds loyalty.", "skills": ["tenant-bot", "review-responder", "patient-intake", "patient-followup", "review-reputation", "referral-engine", "pre-auth"]}, "field-ops": {"title": "AI Field Operations Lead", "icon": "hardhat", "desc": "Tracks every job. Ensures safety. Maximizes efficiency.", "skills": ["property-inspection", "punch-list", "site-report", "safety-compliance", "field-photo-doc", "maintenance-agreement", "menu-engineering", "food-cost", "student-progress"]}, "data-analyst": {"title": "AI Data & Intelligence Analyst", "icon": "brain", "desc": "Extracts insights. Predicts trends. Empowers decisions.", "skills": ["cma-report", "market-crawler", "medical-coding", "visit-summary", "curriculum-builder", "claims-processor", "policy-comparison", "underwriting-assist", "renewal-retention", "review-scraper", "web-extraction"]}};
+const AGENT_ICONS = {"target": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"12\" cy=\"12\" r=\"5\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/></svg>", "chart": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M3 3v18h18\"/><path d=\"M20 16l-4-4-3 3-5-5\"/></svg>", "handshake": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M7 10c0 2 1 3 3 3h4c2 0 3-1 3-3\"/><path d=\"M4 14l3 3 6-6\"/><path d=\"M15 8l3 3\"/></svg>", "gears": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><circle cx=\"7\" cy=\"13\" r=\"2.5\"/><circle cx=\"17\" cy=\"13\" r=\"2.5\"/><path d=\"M7 10v6M17 10v6M10 13h4M7 7l2 2M17 17l2-2\"/></svg>", "people": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><circle cx=\"9\" cy=\"7\" r=\"2\"/><path d=\"M5 11c0-2 2-3 4-3s4 1 4 3v3H5z\"/><circle cx=\"15\" cy=\"7\" r=\"2\"/><path d=\"M11 11c0-2 2-3 4-3s4 1 4 3v3h-8z\"/></svg>", "megaphone": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M4 13c0-2 2-4 4-4h8l4-3v10l-4-3h-8c-2 0-4-2-4-4z\"/></svg>", "scales": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><line x1=\"12\" y1=\"3\" x2=\"12\" y2=\"8\"/><circle cx=\"6\" cy=\"12\" r=\"2\"/><circle cx=\"18\" cy=\"12\" r=\"2\"/><path d=\"M6 14v6h12v-6\"/></svg>", "hardhat": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M4 10c0-3 2-5 8-5s8 2 8 5\"/><path d=\"M6 10h12v6H6z\"/><path d=\"M8 16h8\"/></svg>", "brain": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M9 3c-1 0-2 1-2 2.5S8 8 9 8c1 0 2-1 2-2.5S10 3 9 3zM15 3c1 0 2 1 2 2.5S16 8 15 8c-1 0-2-1-2-2.5S14 3 15 3z\"/><path d=\"M12 9c-2 0-3 2-3 4s1 5 3 5 3-3 3-5-1-4-3-4z\"/></svg>"};
+
+// Render agents grid
+function renderAgents() {
+  const grid = document.getElementById('agentsGrid');
+  if (!grid) return;
+  
+  grid.innerHTML = '';
+  
+  const agentIds = ['chief-of-staff', 'cfo', 'sales-director', 'ops-manager', 'hr-director', 'marketing-director', 'legal-counsel', 'client-success', 'field-ops', 'data-analyst'];
+  
+  agentIds.forEach(id => {
+    const agent = AGENTS[id];
+    if (!agent) return;
+    
+    const card = document.createElement('div');
+    card.className = 'agent-card';
+    
+    const skillTagsHtml = agent.skills.map(skillKey => {
+      const skill = D[skillKey];
+      if (!skill) return '';
+      return `<span class="agent-skill-tag" onclick="openModal('${skillKey}'); event.stopPropagation();">${skill.name}</span>`;
+    }).join('');
+    
+    card.innerHTML = `
+      <div class="agent-icon">${AGENT_ICONS[agent.icon]}</div>
+      <div class="agent-title">${agent.title}</div>
+      <div class="agent-desc">${agent.desc}</div>
+      <div class="agent-skill-count">${agent.skills.length} skills</div>
+      <div class="agent-skills-list">
+        ${skillTagsHtml}
+      </div>
+      <div class="agent-arrow">→</div>
+    `;
+    
+    grid.appendChild(card);
+  });
+}
+
+// Call render when agents panel is shown
+const originalShowPanel = window.showPanel || function(panel, el) {};
+window.showPanel = function(panel, el) {
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('visible'));
+  document.getElementById('panel-' + panel).classList.add('visible');
+  document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  if (panel === 'agents') {
+    setTimeout(renderAgents, 50);
+  }
+};
+
+// Render on page load
+document.addEventListener('DOMContentLoaded', renderAgents);
+window.addEventListener('load', renderAgents);
+
 
 function matchesRole(personas,role){
   if(role==='all') return true;
